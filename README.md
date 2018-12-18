@@ -6,7 +6,7 @@ To run the tool:
 * Install prerequisites and run the python script (counting_tool.py), or
 * just run the executable file (.exe file for windows; .app for mac will follow) 
 
-![Poster](/poster/poster_A0_tracks.pdf)
+![Poster](/poster/poster_A0_tracks.jpg)
 
 ### Please note:
 This approach does not implement it´s own detection and tracking algorithms but makes use of the following algorithms:  
