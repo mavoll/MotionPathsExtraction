@@ -7,9 +7,9 @@ To run the tool:
 * just run the executable file (.exe file for windows; .app for mac will follow) 
 
 ### Please note:
-* This approach does not implement it´s own detection and tracking algorithms but makes use of the following algorithms:  
-** Facebook´s [Detectron](https://github.com/facebookresearch/Detectron) Mask R-CNN implementation 
-** [Deep SORT](https://github.com/nwojke/deep_sort) - Simple Online Realtime Tracking with a Deep Association Metric
+This approach does not implement it´s own detection and tracking algorithms but makes use of the following algorithms:  
+* Facebook´s [Detectron](https://github.com/facebookresearch/Detectron) Mask R-CNN implementation 
+* [Deep SORT](https://github.com/nwojke/deep_sort) - Simple Online Realtime Tracking with a Deep Association Metric
 
 ### Prerequisites and used versions
 
