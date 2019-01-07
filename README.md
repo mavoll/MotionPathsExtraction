@@ -10,7 +10,7 @@ To run the tool:
 
 ## Installing Detectron
 
-See Detectrons [INSTALL.md](https://github.com/mavoll/MotionPathsExtraction/edit/master/Detectron/INSTALL.md)
+See Detectrons [INSTALL.md](https://github.com/mavoll/MotionPathsExtraction/blob/master/Detectron/INSTALL.md)
 
 This document covers how to install Detectron, its dependencies (including Caffe2), and the COCO dataset.
 
@@ -39,7 +39,7 @@ This approach does not implement it´s own detection and tracking algorithms but
 
 ## Installing deep_sort
 
-See deep_sorts [README.md](https://github.com/mavoll/MotionPathsExtraction/edit/master/deep_sort/README.md)
+See deep_sorts [README.md](https://github.com/mavoll/MotionPathsExtraction/blob/master/deep_sort/README.md)
 
 ### Dependencies
 
