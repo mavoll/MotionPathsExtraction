@@ -1,10 +1,15 @@
 # MotionPathsExtraction
 Approach to extract motion paths of vehicles and pedestrians from videos (Multiple object detection &amp; tracking)
 
+#### Please note:
+This approach does not implement it´s own detection and tracking algorithms but makes use of the following algorithms (cloned to this repository):  
+* Facebook´s [Detectron](https://github.com/facebookresearch/Detectron) Mask R-CNN implementation 
+* [Deep SORT](https://github.com/nwojke/deep_sort) - Simple Online Realtime Tracking with a Deep Association Metric
+
 To run the tool:
 
-* Install prerequisites and run the python script (counting_tool.py), or
-* just run the executable file (.exe file for windows; .app for mac will follow) 
+* Install prerequisites 
+* and run the python script (counting_tool.py)
 
 ![Poster](/poster/poster_A0_tracks.jpg)
 
@@ -31,11 +36,6 @@ This document covers how to install Detectron, its dependencies (including Caffe
 To install Caffe2 with CUDA support, follow the [installation instructions](https://caffe2.ai/docs/getting-started.html) from the [Caffe2 website](https://caffe2.ai/). **If you already have Caffe2 installed, make sure to update your Caffe2 to a version that includes the [Detectron module](https://github.com/pytorch/pytorch/tree/master/modules/detectron).**
 
 Please ensure that your Caffe2 installation was successful before proceeding by running the following commands and checking their output as directed in the comments.
-
-#### Please note:
-This approach does not implement it´s own detection and tracking algorithms but makes use of the following algorithms:  
-* Facebook´s [Detectron](https://github.com/facebookresearch/Detectron) Mask R-CNN implementation 
-* [Deep SORT](https://github.com/nwojke/deep_sort) - Simple Online Realtime Tracking with a Deep Association Metric
 
 ## Installing deep_sort
 
