@@ -65,7 +65,26 @@ Overview of Baselines: [here](https://github.com/facebookresearch/Detectron/blob
 
 The pre-generated deep_sort CNN checkpoint files from [here](https://drive.google.com/open?id=18fKzfqnqhqW3s9zwsCbnVJ5XF2JFeqMp) are already included to this repository ([`resources`](https://github.com/mavoll/MotionPathsExtraction/edit/master/deep_sort/resources/networks/)).
 
+## Count intersections
 
+Use the [CountingTool](https://github.com/mavoll/TrafficCountingTool) to draw lines and count intersections. 
+
+## Mapping
+
+Use the [Mapping](?) to map pixel coordinates to geo-coordinates. 
+
+## Animate and analyze tracks
+
+### Import tracking results to PostGIS
+
+### Using QGIS and it´s TimeManager
+
+## Tracks to the SparkPipeline
+
+### Import
+[SparkPipeline](https://github.com/mavoll/SparkPipeline)
+
+### Using Apache Zeppelin and Spark to analyze and visualize tracks
 
 ## Authors
 
