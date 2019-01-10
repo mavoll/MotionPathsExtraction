@@ -11,8 +11,7 @@ This approach does not implement it´s own detection and tracking algorithms but
 ## Installing
 
 - For general information about Detectron, please see [README.md](https://github.com/mavoll/MotionPathsExtraction/blob/master/Detectron/README.md).
-- For general information about deep_sort, please see [README.md](https://github.com/mavoll/MotionPathsExtraction/blob/master/deep
-_sort/README.md).
+- For general information about deep_sort, please see [README.md](https://github.com/mavoll/MotionPathsExtraction/blob/master/deep_sort/README.md).
 
 ### Prerequisites: ###
 
