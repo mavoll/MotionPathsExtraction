@@ -31,7 +31,7 @@ python -c 'from caffe2.python import workspace; print(workspace.NumCudaDevices()
 
 If the `caffe2` Python package is not found, you likely need to adjust your `PYTHONPATH` environment variable to include its location (`/path/to/caffe2/build`, where `build` is the Caffe2 CMake build directory).
 
-## Other Dependencies
+## Coco
 
 Install the [COCO API](https://github.com/cocodataset/cocoapi):
 
