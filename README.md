@@ -6,11 +6,6 @@ This approach does not implement it´s own detection and tracking algorithms but
 * Facebook´s [Detectron](https://github.com/facebookresearch/Detectron) Mask R-CNN implementation 
 * [Deep SORT](https://github.com/nwojke/deep_sort) - Simple Online Realtime Tracking with a Deep Association Metric
 
-To run the tool:
-
-* Install prerequisites 
-* and run the python script (counting_tool.py)
-
 ![Poster](/poster/poster_A0_tracks.jpg)
 
 ## Installing
@@ -21,17 +16,15 @@ This document covers how to install Detectron, its dependencies (including Caffe
 
 ### Requirements: ###
 
-- NVIDIA GPU (CUDA 8.0 and cuDNN 6.0.21.)
+- NVIDIA GPU
+- CUDA 8
+- cuDNN 6
 - Linux
-- Python2
+- Python 2.7
 - Caffe2 (install Caffe2 with CUDA support, follow the [installation instructions](https://caffe2.ai/docs/getting-started.html))
 - various standard Python packages (see [requirements.txt](https://github.com/mavoll/MotionPathsExtraction/blob/master/requirements.txt))
-- COCO API; Instructions for installing these dependencies are found below
-
-* NumPy
-* sklearn
-* OpenCV
-* TensorFlow (>= 1.0; for feature generation) CUDA???TensorFlow 1.5
+- COCO API (see [here](https://github.com/mavoll/MotionPathsExtraction/blob/master/Detectron/INSTALL.md#Other Dependencies) and [here](https://github.com/cocodataset/cocoapi))
+- TensorFlow (== 1.4.0.; for feature generation)
 
 Clone the repository:
 
