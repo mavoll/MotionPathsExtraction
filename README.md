@@ -14,15 +14,14 @@ This document covers how to install Detectron, its dependencies (including Caffe
 
 - For general information about Detectron, please see [README.md](https://github.com/mavoll/MotionPathsExtraction/blob/master/Detectron/README.md).
 
-### Requirements: ###
+### Prerequisites: ###
 
+- Linux
 - NVIDIA GPU
 - CUDA 8
 - cuDNN 6
-- Linux
 - Python 2.7
 - Caffe2 (install Caffe2 with CUDA support, follow the [installation instructions](https://caffe2.ai/docs/getting-started.html))
-- various standard Python packages (see [requirements.txt](https://github.com/mavoll/MotionPathsExtraction/blob/master/requirements.txt))
 - COCO API (see [here](https://github.com/mavoll/MotionPathsExtraction/blob/master/Detectron/INSTALL.md#coco) and [here](https://github.com/cocodataset/cocoapi))
 - TensorFlow (== 1.4.0.; for feature generation)
 
