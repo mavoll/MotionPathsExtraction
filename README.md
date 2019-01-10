@@ -56,7 +56,7 @@ Check that Detectron tests pass (e.g. for [`SpatialNarrowAsOp test`](detectron/t
 
 ```
 python $MotionPathsExtraction/Detectron/detectron/tests/test_spatial_narrow_as_op.py
-`
+```
 
 **Detectron Troubleshooting**
 
@@ -66,7 +66,7 @@ python $MotionPathsExtraction/Detectron/detectron/tests/test_spatial_narrow_as_o
 
 [README.md](https://github.com/mavoll/MotionPathsExtraction/blob/master/deep_sort/README.md)
 
-The pre-generated CNN checkpoint file from [here](https://drive.google.com/open?id=18fKzfqnqhqW3s9zwsCbnVJ5XF2JFeqMp) is already included to this repository ([`resources`](https://github.com/mavoll/MotionPathsExtraction/edit/master/deep_sort/resources/networks/)).
+The pre-generated deep_sort CNN checkpoint files from [here](https://drive.google.com/open?id=18fKzfqnqhqW3s9zwsCbnVJ5XF2JFeqMp) are already included to this repository ([`resources`](https://github.com/mavoll/MotionPathsExtraction/edit/master/deep_sort/resources/networks/)).
 
 
 
