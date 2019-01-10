@@ -13,55 +13,61 @@ To run the tool:
 
 ![Poster](/poster/poster_A0_tracks.jpg)
 
-## Installing Detectron
-
-See Detectrons [INSTALL.md](https://github.com/mavoll/MotionPathsExtraction/blob/master/Detectron/INSTALL.md)
+## Installing
 
 This document covers how to install Detectron, its dependencies (including Caffe2), and the COCO dataset.
 
-- For general information about Detectron, please see [`README.md`](README.md).
+- For general information about Detectron, please see [README.md](https://github.com/mavoll/MotionPathsExtraction/blob/master/Detectron/README.md).
 
-**Requirements:**
+### Requirements: ###
 
-- NVIDIA GPU, Linux, Python2
-- Caffe2, various standard Python packages, and the COCO API; Instructions for installing these dependencies are found below
-
-**Notes:**
-
-- Detectron operators currently do not have CPU implementation; a GPU system is required.
-- Detectron has been tested extensively with CUDA 8.0 and cuDNN 6.0.21.
-
-### Caffe2
-
-To install Caffe2 with CUDA support, follow the [installation instructions](https://caffe2.ai/docs/getting-started.html) from the [Caffe2 website](https://caffe2.ai/). **If you already have Caffe2 installed, make sure to update your Caffe2 to a version that includes the [Detectron module](https://github.com/pytorch/pytorch/tree/master/modules/detectron).**
-
-Please ensure that your Caffe2 installation was successful before proceeding by running the following commands and checking their output as directed in the comments.
-
-## Installing deep_sort
-
-See deep_sorts [README.md](https://github.com/mavoll/MotionPathsExtraction/blob/master/deep_sort/README.md)
-
-### Dependencies
-
-The code is compatible with Python 2.7 and 3. The following dependencies are
-needed to run the tracker:
+- NVIDIA GPU (CUDA 8.0 and cuDNN 6.0.21.)
+- Linux
+- Python2
+- Caffe2 (install Caffe2 with CUDA support, follow the [installation instructions](https://caffe2.ai/docs/getting-started.html))
+- various standard Python packages (see [requirements.txt](https://github.com/mavoll/MotionPathsExtraction/blob/master/requirements.txt))
+- COCO API; Instructions for installing these dependencies are found below
 
 * NumPy
 * sklearn
 * OpenCV
-* TensorFlow (>= 1.0; for feature generation) CUDA???
+* TensorFlow (>= 1.0; for feature generation) CUDA???TensorFlow 1.5
 
-### Installation
+Clone the repository:
 
-First, clone the repository:
 ```
-git clone https://github.com/nwojke/deep_sort.git
+# MotionPathsExtraction=/path/to/clone/MotionPathsExtraction
+git clone https://github.com/mavoll/MotionPathsExtraction.git $MotionPathsExtraction
 ```
-Then, download pre-generated detections and the CNN checkpoint file from
-[here](https://drive.google.com/open?id=18fKzfqnqhqW3s9zwsCbnVJ5XF2JFeqMp).
 
-We have replaced the appearance descriptor with a custom deep convolutional
-neural network (see below).
+Install Python dependencies:
+
+```
+pip install -r $MotionPathsExtraction/requirements.txt
+```
+
+Set up Python modules for Detectron:
+
+```
+cd $MotionPathsExtraction/Detectron && make
+```
+
+Check that Detectron tests pass (e.g. for [`SpatialNarrowAsOp test`](detectron/tests/test_spatial_narrow_as_op.py)):
+
+```
+python $MotionPathsExtraction/Detectron/detectron/tests/test_spatial_narrow_as_op.py
+`
+
+**Detectron Troubleshooting**
+
+[INSTALL.md](https://github.com/mavoll/MotionPathsExtraction/edit/master/Detectron/INSTALL.md)
+
+**deep_sort Troubleshooting** 
+
+[README.md](https://github.com/mavoll/MotionPathsExtraction/blob/master/deep_sort/README.md)
+
+The pre-generated CNN checkpoint file from [here](https://drive.google.com/open?id=18fKzfqnqhqW3s9zwsCbnVJ5XF2JFeqMp) is already included to this repository ([`resources`](https://github.com/mavoll/MotionPathsExtraction/edit/master/deep_sort/resources/networks/)).
+
 
 
 ## Authors
