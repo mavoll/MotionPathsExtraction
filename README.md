@@ -49,6 +49,12 @@ Check that Detectron tests pass (e.g. for [`SpatialNarrowAsOp test`](detectron/t
 python $MotionPathsExtraction/Detectron/detectron/tests/test_spatial_narrow_as_op.py
 ```
 
+Faster & Mask R-CNN Baselines will be downloaded automatically to tmp-folder in regards to your 
+
+Here we have used e2e_mask_rcnn_R-101-FPN_2x model [download](https://dl.fbaipublicfiles.com/detectron/35861858/12_2017_baselines/e2e_mask_rcnn_R-101-FPN_2x.yaml.02_32_51.SgT4y1cO/output/train/coco_2014_train%3Acoco_2014_valminusminival/generalized_rcnn/model_final.pkl)
+
+Overview of Baselines: [here](https://github.com/facebookresearch/Detectron/blob/master/MODEL_ZOO.md)
+
 **Detectron Troubleshooting**
 
 [INSTALL.md](https://github.com/mavoll/MotionPathsExtraction/edit/master/Detectron/INSTALL.md)
