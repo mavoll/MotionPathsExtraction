@@ -52,9 +52,8 @@ conda install pip
 ```
 pip install imutils 
 ```
-autoconf automake libtool curl make g++ unzip
 ```
-conda install numpy pyyaml matplotlib setuptools Cython mock scipy six future protobuf scikit-learn mkl mkl-include cmake cffi typing
+conda install numpy pyyaml matplotlib setuptools scipy protobuf future mkl mkl-include libtool
 ```
 ```
 conda install -c conda-forge opencv
@@ -64,6 +63,9 @@ conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
 ```
 ```
 conda install tensorflow-gpu
+```
+```
+conda install scikit-learn
 ```
 ```
 conda install -c hcc pycocotools
