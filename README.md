@@ -14,7 +14,7 @@ This approach does not implement it´s own detection and tracking algorithms but
 - CUDA-ready NVIDIA GPU ([check](https://www.geforce.com/hardware/technology/cuda/supported-gpus))
 - CUDA >= 9.0
 - cuDNN >= 7.1.3
-- Python 2.7 or 1.6 (not 3.7)
+- Python 2.7 or 3.6 (not 3.7)
 - Caffe2 >= 0.7.0 or PyTorch >= 1.0 (install Caffe2 with CUDA support, follow the [installation instructions](https://caffe2.ai/docs/getting-started.html))
 - COCO API (see [here](https://github.com/mavoll/MotionPathsExtraction/blob/master/Detectron/INSTALL.md#coco) and [here](https://github.com/cocodataset/cocoapi))
 - TensorFlow (== 1.4.0.; for feature generation)
