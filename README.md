@@ -15,6 +15,7 @@ This approach does not implement it´s own detection and tracking algorithms but
 - CUDA >= 9.0
 - cuDNN >= 7.1.3
 - Python 2.7 or 3.6 (not 3.7)
+- OpenCV 3.4 (not 4)
 - Caffe2 >= 0.7.0 or PyTorch >= 1.0 (install Caffe2 with CUDA support, follow the [installation instructions](https://caffe2.ai/docs/getting-started.html))
 - COCO API (see [here](https://github.com/mavoll/MotionPathsExtraction/blob/master/Detectron/INSTALL.md#coco) and [here](https://github.com/cocodataset/cocoapi))
 - TensorFlow (== 1.4.0.; for feature generation)
@@ -25,7 +26,7 @@ This approach does not implement it´s own detection and tracking algorithms but
 Tested with:
 - NVIDIA GeForce GTX 1080ti 11 GB (Ubuntu 16.04, python 2.7, CUDA 9.0, cuDNN 7.1.3, Driver 384.111, TensorFlow 1.8.1, Caffe2 0.7.0 , OpenCV 3.4)
 - Dual-GPU: 2 x NVIDIA GeForce GTX 1080ti 11 GB (Ubuntu 16.04, python 2.7, CUDA 9.0, cuDNN 7.1.3, Driver 384.111, TensorFlow 1.8.1, Caffe2 0.7.0 , OpenCV 3.4)
-- NVIDIA GeForce RTX 2070 8 GB (Ubuntu 18.04, python 3.6, CUDA 10.0, cuDNN 7.3.1, Driver 418.43, TensorFlow 1.11.0, PyTorch (Caffe2) 1.0.1, OpenCV 4 3.4)
+- NVIDIA GeForce RTX 2070 8 GB (Ubuntu 18.04, python 3.6, CUDA 10.0, cuDNN 7.3.1, Driver 418.43, TensorFlow 1.11.0, PyTorch (Caffe2) 1.0.1, OpenCV 3.4)
 
 I have installed Anaconda ([from here](https://www.anaconda.com/distribution/#linux)) to create an environment and to install most necessary components. For example:
 
@@ -86,7 +87,7 @@ conda install -c mingfeima mkldnn
 conda install -c nnpack
 ```
 ```
-conda install -c conda-forge opencv
+conda install -c conda-forge opencv=3.4
 ```
 ```
 conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
