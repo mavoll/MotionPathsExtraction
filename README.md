@@ -151,6 +151,8 @@ More information about the tracker deep_sort, its training and its options can b
 
 ## Usage: ##
 
+## Further Usage based on the tracking results: ##
+
 ### Count intersections
 
 Use the [CountingTool](https://github.com/mavoll/TrafficCountingTool) to draw lines and count intersections. 
