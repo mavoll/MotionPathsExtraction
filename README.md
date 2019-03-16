@@ -178,12 +178,9 @@ For configuration see [here](http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS
 
 Use one of the python scripts  ??? to import tracks to PostGIS as LineStringM or PointM data.
 
+#### Using QGIS and its TimeManager
+
 Install QGIS like [here](https://freegistutorial.com/how-to-install-qgis-on-ubuntu-18-04-bionic-beaver/).
-
-
-
-
-#### Using QGIS and it´s TimeManager
 
 ### Tracks to the SparkPipeline
 
