@@ -6,7 +6,7 @@ This approach does not implement it´s own detection and tracking algorithms but
 * Facebook´s [Detectron](https://github.com/facebookresearch/Detectron) Mask R-CNN implementation 
 * [Deep SORT](https://github.com/nwojke/deep_sort) - Simple Online Realtime Tracking with a Deep Association Metric
 
-![Poster](/poster/poster_A0_tracks.jpg)
+![Poster](/poster/poster_A0_tracks.jpg?raw=true "MotionPathsExtraction")
 
 ## Prerequisites: ###
 
