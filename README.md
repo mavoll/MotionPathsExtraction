@@ -8,7 +8,7 @@ This approach does not implement it´s own detection and tracking algorithms but
 
 ![Poster](/poster/poster_A0_tracks.jpg)
 
-### Prerequisites: ###
+## Prerequisites: ###
 
 - Ubuntu 16.04 or 18.04
 - CUDA-ready NVIDIA GPU ([check](https://www.geforce.com/hardware/technology/cuda/supported-gpus))
@@ -21,7 +21,7 @@ This approach does not implement it´s own detection and tracking algorithms but
 - TensorFlow (== 1.4.0.; for feature generation)
 - (Anaconda 2018.12)
 
-### Get your environment ready: ###
+## Get your environment ready: ###
  
 Tested with:
 - NVIDIA GeForce GTX 1080ti 11 GB (Ubuntu 16.04, python 2.7, CUDA 9.0, cuDNN 7.1.3, Driver 384.111, TensorFlow 1.8.1, Caffe2 0.7.0 , OpenCV 3.4)
@@ -111,7 +111,7 @@ cv2.__version__
 tf.__version__
 torch.__version__
 ```
-### Install: ###
+## Install: ##
 
 ```
 cd ~
@@ -155,28 +155,28 @@ More information about the tracker deep_sort, its training and its options can b
 
 [README.md](https://github.com/mavoll/MotionPathsExtraction/blob/master/deep_sort/README.md)
 
-### Usage: ###
+## Usage: ##
 
-## Count intersections
+### Count intersections
 
 Use the [CountingTool](https://github.com/mavoll/TrafficCountingTool) to draw lines and count intersections. 
 
-## Mapping
+### Mapping
 
 Use the [Mapping](?) to map pixel coordinates to geo-coordinates. 
 
-## Animate and analyze tracks
+### Animate and analyze tracks
 
-### Import tracking results to PostGIS
+#### Import tracking results to PostGIS
 
-### Using QGIS and it´s TimeManager
+#### Using QGIS and it´s TimeManager
 
-## Tracks to the SparkPipeline
+### Tracks to the SparkPipeline
 
-### Import
+#### Import
 [SparkPipeline](https://github.com/mavoll/SparkPipeline)
 
-### Using Apache Zeppelin and Spark to analyze and visualize tracks
+#### Using Apache Zeppelin and Spark to analyze and visualize tracks
 
 ## Authors
 
