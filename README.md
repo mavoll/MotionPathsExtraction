@@ -113,6 +113,37 @@ torch.__version__
 ```
 ### Install: ###
 
+```
+git clone https://github.com/facebookresearch/detectron
+```
+```
+cd detectron/lib
+```
+```
+make
+```
+Test detectron:
+```
+python $DETECTRON/detectron/tests/test_spatial_narrow_as_op.py
+```
+```
+```
+git clone https://github.com/nwojke/deep_sort.git
+```
+
+Pre-generated detections and the CNN checkpoint file has been downloaded from [here](https://drive.google.com/drive/folders/18fKzfqnqhqW3s9zwsCbnVJ5XF2JFeqMp) and can be found here:
+```
+/deep_sort/resources/networks
+```
+
+More information about the tracker deep_sort, its training and its options can be found [here](https://github.com/nwojke/deep_sort).
+[This] page provides detailed informations about Facebooks Detectron and its Model Zoo. 
+
+Here is a end-to-end trained Mask R-CNN model with a ResNet-101-FPN backbone from [here](https://dl.fbaipublicfiles.com/detectron/35861858/12_2017_baselines/e2e_mask_rcnn_R-101-FPN_2x.yaml.02_32_51.SgT4y1cO/output/train/coco_2014_train%3Acoco_2014_valminusminival/generalized_rcnn/model_final.pkl) used.
+All models based on the [COCO dataset](http://cocodataset.org/#home).
+
+
+
 Clone the repository:
 
 ```
