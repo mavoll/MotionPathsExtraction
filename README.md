@@ -8,21 +8,77 @@ This approach does not implement it´s own detection and tracking algorithms but
 
 ![Poster](/poster/poster_A0_tracks.jpg)
 
-## Installing
-
-- For general information about Detectron, please see [README.md](https://github.com/mavoll/MotionPathsExtraction/blob/master/Detectron/README.md).
-- For general information about deep_sort, please see [README.md](https://github.com/mavoll/MotionPathsExtraction/blob/master/deep_sort/README.md).
-
 ### Prerequisites: ###
 
-- Linux
-- NVIDIA GPU
-- CUDA 8
-- cuDNN 6
-- Python 2.7
-- Caffe2 (install Caffe2 with CUDA support, follow the [installation instructions](https://caffe2.ai/docs/getting-started.html))
+- Ubuntu 16.04 or 18.04
+- CUDA-ready NVIDIA GPU ([check](https://www.geforce.com/hardware/technology/cuda/supported-gpus))
+- CUDA >= 9.0
+- cuDNN >= 7.1.3
+- Python 2.7 or 1.6 (not 3.7)
+- Caffe2 >= 0.7.0 or PyTorch >= 1.0 (install Caffe2 with CUDA support, follow the [installation instructions](https://caffe2.ai/docs/getting-started.html))
 - COCO API (see [here](https://github.com/mavoll/MotionPathsExtraction/blob/master/Detectron/INSTALL.md#coco) and [here](https://github.com/cocodataset/cocoapi))
 - TensorFlow (== 1.4.0.; for feature generation)
+- (Anaconda 2018.12)
+
+### Get your environment ready: ###
+ 
+Tested with:
+- NVIDIA GeForce GTX 1080ti 11 GB (Ubuntu 16.04, python 2.7, CUDA 9.0, cuDNN 7.1.3, Driver 384.111, TensorFlow 1.8.1, Caffe2 0.7.0 , OpenCV 3.4)
+- Dual-GPU: 2 x NVIDIA GeForce GTX 1080ti 11 GB (Ubuntu 16.04, python 2.7, CUDA 9.0, cuDNN 7.1.3, Driver 384.111, TensorFlow 1.8.1, Caffe2 0.7.0 , OpenCV 3.4)
+- NVIDIA GeForce RTX 2070 8 GB (Ubuntu 18.04, python 3.6, CUDA 10.0, cuDNN 7.3.1, Driver 418.43, TensorFlow 1.11.0, PyTorch (Caffe2) 1.0.1, OpenCV 4 3.4)
+
+I have installed Anaconda ([from here](https://www.anaconda.com/distribution/#linux)) to create an environment and to install most necessary components. For example:
+
+Create environment:
+
+```
+conda create --name envName python=3.6 
+```
+```
+conda activate envName 
+```
+```
+conda install ipykernel 
+```
+```
+python -m ipykernel install --user --name envName 
+```
+
+Install packages:
+
+```
+conda install pip  
+```
+```
+pip install imutils 
+```
+autoconf automake libtool curl make g++ unzip
+```
+conda install numpy pyyaml matplotlib setuptools Cython mock scipy six future protobuf scikit-learn mkl mkl-include cmake cffi typing
+```
+```
+conda install -c conda-forge opencv
+```
+```
+conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
+```
+```
+conda install tensorflow-gpu
+```
+```
+conda install -c hcc pycocotools
+```
+
+Test Installations within Python:
+```
+import cv2
+import tensorflow as tf
+import torch
+cv2.__version__
+tf.__version__
+torch.__version__
+```
+### Install: ###
 
 Clone the repository:
 
