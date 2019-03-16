@@ -166,6 +166,23 @@ Use the [Mapping](?) to map pixel coordinates to geo-coordinates.
 
 #### Import tracking results to PostGIS
 
+Install PostGIS:
+```
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt bionic-pgdg main" >> /etc/apt/sources.list'
+wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -
+sudo apt update
+sudo apt-get install postgresql-11-postgis-2.5
+sudo apt install postgis
+```
+For configuration see [here](http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS24UbuntuPGSQL10Apt).
+
+Use one of the python scripts  ??? to import tracks to PostGIS as LineStringM or PointM data.
+
+Install QGIS like [here](https://freegistutorial.com/how-to-install-qgis-on-ubuntu-18-04-bionic-beaver/).
+
+
+
+
 #### Using QGIS and it´s TimeManager
 
 ### Tracks to the SparkPipeline
