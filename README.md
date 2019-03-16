@@ -2,7 +2,7 @@
 Approach to extract motion paths of vehicles and pedestrians from videos (Multiple object detection &amp; tracking)
 
 #### Please note:
-This approach does not implement it´s own detection and tracking algorithms but makes use of the following algorithms (cloned to this repository):  
+This approach does not implement it´s own detection and tracking algorithms but makes use of the following algorithms:  
 * Facebook´s [Detectron](https://github.com/facebookresearch/Detectron) Mask R-CNN implementation 
 * [Deep SORT](https://github.com/nwojke/deep_sort) - Simple Online Realtime Tracking with a Deep Association Metric
 
