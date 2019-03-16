@@ -1,5 +1,5 @@
 # MotionPathsExtraction
-Approach to extract motion paths of vehicles and pedestrians from videos (Multiple object detection &amp; tracking)
+Offline approach to extract motion paths of vehicles and pedestrians from videos (Multiple object detection &amp; tracking)
 
 #### Please note:
 This approach does not implement it´s own detection and tracking algorithms but makes use of the following algorithms:  
