@@ -125,15 +125,9 @@ cd MotionPathsExtraction/Detectron
 ```
 make
 ```
-Test Detectron:
+### Test Detectron: ###
 ```
 python detectron/tests/test_spatial_narrow_as_op.py
-```
-```
-cd ~
-```
-```
-git clone https://github.com/nwojke/deep_sort.git
 ```
 
 [This](https://github.com/facebookresearch/Detectron) page provides detailed informations about Facebooks tracker Detectron and its Model Zoo.
