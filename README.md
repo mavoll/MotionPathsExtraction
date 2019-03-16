@@ -30,7 +30,7 @@ Tested with:
 
 I have installed Anaconda ([from here](https://www.anaconda.com/distribution/#linux)) to create an environment and to install most necessary components. For example:
 
-Install Anaconda:
+### Install Anaconda: ###
 
 ```
 wget https://repo.anaconda.com/archive/Anaconda3-2018.12-Linux-x86_64.sh 
@@ -54,7 +54,7 @@ conda update anaconda
 conda update anaconda 
 ```
 
-Create environment:
+### Create environment: ###
 
 ```
 conda create --name envName python=3.6 
@@ -69,7 +69,7 @@ conda install ipykernel
 python -m ipykernel install --user --name envName 
 ```
 
-Install packages:
+### Install packages: ### 
 
 ```
 conda install pip  
@@ -102,7 +102,7 @@ conda install scikit-learn
 conda install -c hcc pycocotools
 ```
 
-Test Installations within Python:
+### Test Installations within Python: ### 
 ```
 import cv2
 import tensorflow as tf
