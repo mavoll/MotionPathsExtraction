@@ -114,17 +114,23 @@ torch.__version__
 ### Install: ###
 
 ```
-git clone https://github.com/facebookresearch/detectron
+cd ~
 ```
 ```
-cd detectron/lib
+git clone https://github.com/mavoll/MotionPathsExtraction.git
+```
+```
+cd MotionPathsExtraction/Detectron
 ```
 ```
 make
 ```
-Test detectron:
+Test Detectron:
 ```
-python $DETECTRON/detectron/tests/test_spatial_narrow_as_op.py
+python detectron/tests/test_spatial_narrow_as_op.py
+```
+```
+cd ~
 ```
 ```
 git clone https://github.com/nwojke/deep_sort.git
@@ -136,43 +142,10 @@ All models based on the [COCO dataset](http://cocodataset.org/#home).
 
 Pre-generated detections and the CNN checkpoint file for the tracker deep_sort has been downloaded from [here](https://drive.google.com/drive/folders/18fKzfqnqhqW3s9zwsCbnVJ5XF2JFeqMp) and can be found here:
 ```
-/deep_sort/resources/networks
+MotionPathsExtraction/deep_sort/resources/networks/
 ```
 More information about the tracker deep_sort, its training and its options can be found [here](https://github.com/nwojke/deep_sort).
 
-
-
-
-Clone the repository:
-
-```
-# MotionPathsExtraction=/path/to/clone/MotionPathsExtraction
-git clone https://github.com/mavoll/MotionPathsExtraction.git $MotionPathsExtraction
-```
-
-Install Python dependencies:
-
-```
-pip install -r $MotionPathsExtraction/requirements.txt
-```
-
-Set up Python modules for Detectron:
-
-```
-cd $MotionPathsExtraction/Detectron && make
-```
-
-Check that Detectron tests pass (e.g. for [`SpatialNarrowAsOp test`](detectron/tests/test_spatial_narrow_as_op.py)):
-
-```
-python $MotionPathsExtraction/Detectron/detectron/tests/test_spatial_narrow_as_op.py
-```
-
-Faster & Mask R-CNN Baselines will be downloaded automatically to tmp-folder in regards to your 
-
-Here we have used e2e_mask_rcnn_R-101-FPN_2x model [download](https://dl.fbaipublicfiles.com/detectron/35861858/12_2017_baselines/e2e_mask_rcnn_R-101-FPN_2x.yaml.02_32_51.SgT4y1cO/output/train/coco_2014_train%3Acoco_2014_valminusminival/generalized_rcnn/model_final.pkl)
-
-Overview of Baselines: [here](https://github.com/facebookresearch/Detectron/blob/master/MODEL_ZOO.md)
 
 **Detectron Troubleshooting**
 
@@ -182,7 +155,7 @@ Overview of Baselines: [here](https://github.com/facebookresearch/Detectron/blob
 
 [README.md](https://github.com/mavoll/MotionPathsExtraction/blob/master/deep_sort/README.md)
 
-The pre-generated deep_sort CNN checkpoint files from [here](https://drive.google.com/open?id=18fKzfqnqhqW3s9zwsCbnVJ5XF2JFeqMp) are already included to this repository ([`resources`](https://github.com/mavoll/MotionPathsExtraction/edit/master/deep_sort/resources/networks/)).
+### Usage: ###
 
 ## Count intersections
 
