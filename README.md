@@ -29,6 +29,30 @@ Tested with:
 
 I have installed Anaconda ([from here](https://www.anaconda.com/distribution/#linux)) to create an environment and to install most necessary components. For example:
 
+Install Anaconda:
+
+```
+wget https://repo.anaconda.com/archive/Anaconda3-2018.12-Linux-x86_64.sh 
+```
+```
+bash Anaconda3-2018.12-Linux-x86_64.sh
+```
+```
+source ~/.bashrc
+```
+```
+conda info
+```
+```
+conda update conda
+```
+```
+conda update anaconda
+```
+```
+conda update anaconda 
+```
+
 Create environment:
 
 ```
@@ -54,6 +78,12 @@ pip install imutils
 ```
 ```
 conda install numpy pyyaml matplotlib setuptools scipy protobuf future mkl mkl-include libtool
+```
+```
+conda install -c mingfeima mkldnn
+```
+```
+conda install -c nnpack
 ```
 ```
 conda install -c conda-forge opencv
