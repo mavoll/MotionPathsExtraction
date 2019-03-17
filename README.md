@@ -180,7 +180,7 @@ Use one of the python scripts  ??? to import tracks to PostGIS as LineStringM or
 
 #### Using QGIS and its TimeManager
 
-Install QGIS like [here](https://freegistutorial.com/how-to-install-qgis-on-ubuntu-18-04-bionic-beaver/).
+Install QGIS like [here](https://freegistutorial.com/how-to-install-qgis-on-ubuntu-18-04-bionic-beaver/) and connect to the former installed and configured PostGIS.
 
 ### Tracks to the SparkPipeline
 
