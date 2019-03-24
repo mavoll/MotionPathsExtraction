@@ -3,6 +3,7 @@
 UNDER CONSTRUCTION
 
 per_process_gpu_mem_fraction = 0.1
+imutils_queue_size = 128 
 
 Multi object and classes detection and tracking pipeline to extract motion paths of objects like vehicles and pedestrians from videos.
 
