@@ -29,7 +29,7 @@ We also make use of [ChainerCV](https://github.com/chainer/chainercv) and its de
 
 - Ubuntu 16.04 or 18.04
 - CUDA-ready NVIDIA GPU ([check](https://www.geforce.com/hardware/technology/cuda/supported-gpus))
-- CUDA >= 9.0
+- CUDA >= 9.0 (< 10.1)
 - cuDNN >= 7.1.3
 - Python 2.7 or 3.6 (not 3.7)
 - OpenCV 3.4 (not 4)
