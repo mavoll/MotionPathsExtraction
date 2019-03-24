@@ -4,9 +4,9 @@ Multi object and classes detection and tracking pipeline to extract motion paths
 #### Please note:
 This approach does not implement it´s own detection and tracking algorithms but makes use of the following algorithms:  
 * Facebook´s [Detectron](https://github.com/facebookresearch/Detectron) Mask/Faster R-CNN implementations:
- * e2e_mask_rcnn_R-101-FPN_2x (coco_2014_train and coco_2014_valminusminival)
- * e2e_faster_rcnn_R-101-FPN_2x (coco_2014_train and coco_2014_valminusminival)
- * others from the [Detectron Model Zoo](https://github.com/facebookresearch/Detectron/blob/master/MODEL_ZOO.md) can be used per config file and detectrons auto-download functionality
+  * e2e_mask_rcnn_R-101-FPN_2x (coco_2014_train and coco_2014_valminusminival)
+  * e2e_faster_rcnn_R-101-FPN_2x (coco_2014_train and coco_2014_valminusminival)
+  * others from the [Detectron Model Zoo](https://github.com/facebookresearch/Detectron/blob/master/MODEL_ZOO.md) can be used per config file and detectrons auto-download functionality
 * [SORT](https://github.com/abewley/sort) - A simple online and realtime tracking algorithm for 2D multiple object tracking in video sequences
 * [Deep SORT](https://github.com/nwojke/deep_sort) - Simple Online Realtime Tracking with a Deep Association Metric
 
