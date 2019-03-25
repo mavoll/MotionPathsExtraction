@@ -3,7 +3,15 @@
 UNDER CONSTRUCTION
 
 per_process_gpu_mem_fraction = 0.1
+
 imutils_queue_size = 128 
+
+download detectron ressources (weights and configfiles) from here and extract to MotionPathsExtraction root directory
+or
+change folder path in config.ini and let detectron download corresponding resources
+detectron_download_cache
+
+download deep_sort ressources (tf model to generate person re-identification features) from here and extract to MotionPathsExtraction root directory
 
 Multi object and classes detection and tracking pipeline to extract motion paths of objects like vehicles and pedestrians from videos.
 
