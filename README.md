@@ -13,6 +13,9 @@ detectron_download_cache
 
 download deep_sort ressources (tf model to generate person re-identification features) from here and extract to MotionPathsExtraction root directory
 
+copy into or let auto download by chainer into:
+$HOME/.chainer/dataset/pfnet/chainercv/models
+
 Multi object and classes detection and tracking pipeline to extract motion paths of objects like vehicles and pedestrians from videos.
 
 #### Please note:
