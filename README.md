@@ -229,9 +229,9 @@ Use the GUI or the config.ini to change and test detector or tracker related par
 
 Two parameter to mention:
 
-'per_process_gpu_mem_fraction = 0.1' is set here depending on used GPU. It is necessary to make sure that the GPU can load both, the detector and the tracker model, at the same time to be able to initialize detector and tracker at the begnning of the pipeline and not for each frame or detector and tracker sequencially.  
+`per_process_gpu_mem_fraction = 0.1` is set here depending on used GPU. It is necessary to make sure that the GPU can load both, the detector and the tracker model, at the same time to be able to initialize detector and tracker at the begnning of the pipeline and not for each frame or detector and tracker sequencially.  
 
-'imutils_queue_size = 128' sets the input buffer queue size. 0 is infinite. Imagine, that this queue will got filled fast if input frame rate is higher than processing framerate.
+`imutils_queue_size = 128` sets the input buffer queue size. 0 is infinite. Imagine, that this queue will got filled fast if input frame rate is higher than processing framerate. Thanks to [imutils](https://github.com/jrosebr1/imutils) for providing this out-of-the-box.
 
 
 [This](https://github.com/facebookresearch/Detectron) page provides detailed informations about Facebooks tracker Detectron and its Model Zoo.
