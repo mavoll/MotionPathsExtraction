@@ -251,8 +251,8 @@ All models based on the [COCO dataset](http://cocodataset.org/#home).
 ## Usage: ##
 
 <p align="center">
-  <img src="/images/gui.png" width="400" align="middle">
-  <img src="/images/config_gui.png" width="400" align="middle">
+  <img src="/images/gui.png" width="300" align="middle">
+  <img src="/images/config_gui.png" width="500" align="middle">
 </p>
 
 <p align="center">
