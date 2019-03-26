@@ -251,7 +251,7 @@ All models based on the [COCO dataset](http://cocodataset.org/#home).
 ## Usage: ##
 
 -  Change options, save and load config files
--  Choose detector (and options) to use (can be changed on the fly)
+-  Choose detector (and options) to use
 -  Choose tracker (and options) to use 
 -  Choose input source and run
 
