@@ -250,26 +250,41 @@ All models based on the [COCO dataset](http://cocodataset.org/#home).
 
 ## Usage: ##
 
+-  Change options, save and load config files
+-  Choose detector (and options) to use (can be changed on the fly)
+-  Choose tracker (and options) to use 
+-  Choose input source and run
+
 <p align="center">
   <img src="/images/gui.png" width="300" align="middle">
   <img src="/images/config_gui.png" width="500" align="middle">
 </p>
 
+-  See FPS (also displayed on screen) and other timer infos on logging window
+
 <p align="center">
   <img src="/images/logging_window.png" width="800" align="middle">
 </p>
+
+Mask R-CNN in combination with deep_sort (here 1 FPS on GeForce RTX2070 8GB):
 
 <p align="center">
   <img src="/images/maskrcnn.png" width="800" align="middle">
 </p>
 
+Faster R-CNN in combination with deep_sort (here 5 FPS on GeForce RTX2070 8GB):
+
 <p align="center">
   <img src="/images/fasterrcnn_deep_sort.png" width="800" align="middle">
 </p>
 
+SSD and SORT (here 15 FPS on GeForce RTX2070 8GB):
+
 <p align="center">
   <img src="/images/ssd.png" width="800" align="middle">
 </p>
+
+You have to consider, that if you want to have a Faster R-CNN -powerful detection engine running almost in real-time, than it might be possible or good enought with limited FPS. But if you also need to get good tracking results with less identity switches, than you need to feed your tracker with >20 FPS. So a real-time detection/tracking pipeline (with Detections of Pedestrians on Faster R-CNN level) is hard to archive (especially with mobile Hardware like NVIDIA Jetson TX2 but also not possible with cards like GTX 1080 Ti 11GB or RTX 2070 8GB). SSD with SORT runs on NVIDIA TX2 almost fluently. See later results.
 
 ## Multi GPU batch usage (dataset-level): ###
 
