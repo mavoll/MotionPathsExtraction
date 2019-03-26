@@ -16,6 +16,7 @@ download deep_sort ressources (tf model to generate person re-identification fea
 copy into or let auto download by chainer into:
 $HOME/.chainer/dataset/pfnet/chainercv/models
 
+empfehle papers
 Multi object and classes detection and tracking pipeline to extract motion paths of objects like vehicles and pedestrians from videos.
 
 #### Please note:
@@ -166,16 +167,20 @@ conda install -c conda-forge filterpy
 ```
 
 ### Test Installations within Python: ###
+
 ```
 import chainer
 import cv2
 import tensorflow as tf
 import torch
+import caffe2
 chainer.__version__
 cv2.__version__
 tf.__version__
 torch.__version__
+caffe2.__version__
 ```
+
 ## Install: ##
 
 ```
@@ -185,15 +190,54 @@ cd ~
 git clone https://github.com/mavoll/MotionPathsExtraction.git
 ```
 ```
-cd MotionPathsExtraction/Detectron
+cd MotionPathsExtraction
+```
+```
+git clone https://github.com/facebookresearch/Detectron.git
+```
+```
+cd Detectron
 ```
 ```
 make
 ```
-### Test Detectron: ###
 ```
-python detectron/tests/test_spatial_narrow_as_op.py
+cd ..
 ```
+```
+git clone https://github.com/nwojke/deep_sort.git
+```
+```
+git clone https://github.com/abewley/sort.git
+```
+
+### Download Resources: ###
+
+You need to download some resources in order to make it work. 
+
+-  Pre-generated CNN checkpoint file (mars-small128.pb) from [here](https://drive.google.com/open?id=18fKzfqnqhqW3s9zwsCbnVJ5XF2JFeqMp) provided from [Deep SORT](https://github.com/nwojke/deep_sort). 
+-  End-to-End Faster & Mask R-CNN Baselines from Detectrons Model Zoo ([Faster-RCNN: R-101-FPN](https://dl.fbaipublicfiles.com/detectron/35857952/12_2017_baselines/e2e_faster_rcnn_R-101-FPN_2x.yaml.01_39_49.JPwJDh92/output/train/coco_2014_train%3Acoco_2014_valminusminival/generalized_rcnn/model_final.pkl) and [Mask-RCNN: R-101-FPN](https://dl.fbaipublicfiles.com/detectron/35861858/12_2017_baselines/e2e_mask_rcnn_R-101-FPN_2x.yaml.02_32_51.SgT4y1cO/output/train/coco_2014_train%3Acoco_2014_valminusminival/generalized_rcnn/model_final.pkl) used here.
+
+You can use other models from the model zoo by downloading them and set cfg and wts within config.ini accordingly. 
+
+The easiest way is to use the auto download functionalities provided by Detectron and Chainer and additionally download manually CNN checkpoint file which is used for feature generation (Tensorflow) by the Tracker Deep SORT.
+
+Just make sure that you set following parameter in config.ini:
+
+```
+[Detectron]
+download_cache = SOMEPATH/detectron-download-cache
+
+[deep_sort_features]
+model = SOMEPATH/networks/mars-small128.pb
+```
+`ChainerCV will automatically download to ~/.chainer`.
+
+```
+python detect_and_track.py
+```
+
+
 
 [This](https://github.com/facebookresearch/Detectron) page provides detailed informations about Facebooks tracker Detectron and its Model Zoo.
 Here is a end-to-end trained Mask R-CNN model with a ResNet-101-FPN backbone from [here](https://dl.fbaipublicfiles.com/detectron/35861858/12_2017_baselines/e2e_mask_rcnn_R-101-FPN_2x.yaml.02_32_51.SgT4y1cO/output/train/coco_2014_train%3Acoco_2014_valminusminival/generalized_rcnn/model_final.pkl) used.
