@@ -2,19 +2,6 @@
 
 UNDER CONSTRUCTION
 
-per_process_gpu_mem_fraction = 0.1
-
-imutils_queue_size = 128
-
-download detectron ressources (weights and configfiles) from here and extract to MotionPathsExtraction root directory
-or
-change folder path in config.ini and let detectron download corresponding resources
-detectron_download_cache
-
-download deep_sort ressources (tf model to generate person re-identification features) from here and extract to MotionPathsExtraction root directory
-
-copy into or let auto download by chainer into:
-$HOME/.chainer/dataset/pfnet/chainercv/models
 
 empfehle papers
 Multi object and classes detection and tracking pipeline to extract motion paths of objects like vehicles and pedestrians from videos.
@@ -237,6 +224,14 @@ model = SOMEPATH/networks/mars-small128.pb
 python detect_and_track.py
 ```
 
+### Parameter: ###
+Use the GUI or the config.ini to change and test detector or tracker related parameter.
+
+Two parameter to mention:
+
+'per_process_gpu_mem_fraction = 0.1' is set here depending on used GPU. It is necessary to make sure that the GPU can load both, the detector and the tracker model, at the same time to be able to initialize detector and tracker at the begnning of the pipeline and not for each frame or detector and tracker sequencially.  
+
+'imutils_queue_size = 128' sets the input buffer queue size. 0 is infinite. Imagine, that this queue will got filled fast if input frame rate is higher than processing framerate.
 
 
 [This](https://github.com/facebookresearch/Detectron) page provides detailed informations about Facebooks tracker Detectron and its Model Zoo.
