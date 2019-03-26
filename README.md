@@ -4,7 +4,7 @@ UNDER CONSTRUCTION
 
 per_process_gpu_mem_fraction = 0.1
 
-imutils_queue_size = 128 
+imutils_queue_size = 128
 
 download detectron ressources (weights and configfiles) from here and extract to MotionPathsExtraction root directory
 or
@@ -12,6 +12,9 @@ change folder path in config.ini and let detectron download corresponding resour
 detectron_download_cache
 
 download deep_sort ressources (tf model to generate person re-identification features) from here and extract to MotionPathsExtraction root directory
+
+copy into or let auto download by chainer into:
+$HOME/.chainer/dataset/pfnet/chainercv/models
 
 Multi object and classes detection and tracking pipeline to extract motion paths of objects like vehicles and pedestrians from videos.
 
@@ -53,19 +56,35 @@ We also make use of [ChainerCV](https://github.com/chainer/chainercv) and its de
 - (Anaconda 2018.12)
 
 ## Get your environment ready: ###
- 
+
 Tested with:
 - NVIDIA GeForce GTX 1080ti 11 GB (Ubuntu 16.04, python 2.7, CUDA 9.0, cuDNN 7.1.3, Driver 384.111, TensorFlow 1.8.1, Caffe2 0.7.0 , OpenCV 3.4, Chainer 5.3.0, Cupy 5.1.0, , ChainerCV 0.10)
 - Dual-GPU: 2 x NVIDIA GeForce GTX 1080ti 11 GB (Ubuntu 16.04, python 2.7, CUDA 9.0, cuDNN 7.1.3, Driver 384.111, TensorFlow 1.8.1, Caffe2 0.7.0 , OpenCV 3.4, Chainer 5.3.0, Cupy 5.1.0, , ChainerCV 0.10)
 - NVIDIA GeForce RTX 2070 8 GB (Ubuntu 18.04, python 3.6, CUDA 10.0, cuDNN 7.3.1, Driver 418.43, TensorFlow 1.11.0, PyTorch (Caffe2) 1.0.1, OpenCV 3.4, Chainer 5.3.0, Cupy 5.1.0 , ChainerCV 0.10)
 
-I have installed Anaconda ([from here](https://www.anaconda.com/distribution/#linux)) to create an environment and to install components. 
+I have installed Anaconda ([from here](https://www.anaconda.com/distribution/#linux)) to create an environment and to install components.
 For example:
+
 
 ### Install Anaconda: ###
 
 ```
-wget https://repo.anaconda.com/archive/Anaconda3-2018.12-Linux-x86_64.sh 
+wget https://repo.anaconda.com/archive/Anaconda3-2018.12-Linux-x86_64.sh
+```
+```
+bash Anaconda3-2018.12-Linux-x86_64.sh
+```
+```
+source ~/.bashrc
+```
+```
+conda info
+```
+```
+conda update conda
+```
+```
+wget https://repo.anaconda.com/archive/Anaconda3-2018.12-Linux-x86_64.sh
 ```
 ```
 bash Anaconda3-2018.12-Linux-x86_64.sh
@@ -83,31 +102,31 @@ conda update conda
 conda update anaconda
 ```
 ```
-conda update anaconda 
+conda update anaconda
 ```
 
 ### Create environment: ###
 
 ```
-conda create --name envName python=3.6 
+conda create --name envName python=3.6
 ```
 ```
-conda activate envName 
+conda activate envName
 ```
 ```
-conda install ipykernel 
+conda install ipykernel
 ```
 ```
-python -m ipykernel install --user --name envName 
+python -m ipykernel install --user --name envName
 ```
 
-### Install packages: ### 
+### Install packages: ###
 
 ```
 conda install pip  
 ```
 ```
-pip install imutils 
+pip install imutils
 ```
 ```
 conda install numpy pyyaml matplotlib setuptools scipy protobuf future mkl mkl-include libtool
@@ -146,7 +165,7 @@ pip install chainercv
 conda install -c conda-forge filterpy
 ```
 
-### Test Installations within Python: ### 
+### Test Installations within Python: ###
 ```
 import chainer
 import cv2
@@ -191,7 +210,7 @@ More information about the tracker deep_sort, its training and its options can b
 
 [INSTALL.md](https://github.com/mavoll/MotionPathsExtraction/edit/master/Detectron/INSTALL.md)
 
-**deep_sort Troubleshooting** 
+**deep_sort Troubleshooting**
 
 [README.md](https://github.com/mavoll/MotionPathsExtraction/blob/master/deep_sort/README.md)
 
@@ -201,11 +220,11 @@ More information about the tracker deep_sort, its training and its options can b
 
 ### Count intersections
 
-Use the [CountingTool](https://github.com/mavoll/TrafficCountingTool) to draw lines and count intersections. 
+Use the [CountingTool](https://github.com/mavoll/TrafficCountingTool) to draw lines and count intersections.
 
 ### Mapping
 
-Use the [Mapping](?) to map pixel coordinates to geo-coordinates. 
+Use the [Mapping](?) to map pixel coordinates to geo-coordinates.
 
 ### Animate and analyze tracks
 
