@@ -250,6 +250,27 @@ All models based on the [COCO dataset](http://cocodataset.org/#home).
 
 ## Usage: ##
 
+<p align="center">
+  <img src="/images/gui.png" width="450" align="middle">
+  <img src="/images/config_gui.png" width="150" align="middle">
+</p>
+
+<p align="center">
+  <img src="/images/logging_window.png" width="450" align="middle">
+</p>
+
+<p align="center">
+  <img src="/images/maskrcnn.png" width="450" align="middle">
+</p>
+
+<p align="center">
+  <img src="/images/fasterrcnn_deep_sort.png" width="450" align="middle">
+</p>
+
+<p align="center">
+  <img src="/images/ssd.png" width="450" align="middle">
+</p>
+
 ## Multi GPU batch usage (dataset-level): ###
 
 Only on dataset level, because tracker and detector models fit into one GPU at the same time so using multiple processes (Pythons multiprocessing) and instances, one per GPU, to batch process bigger input data should be ok.  
