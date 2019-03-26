@@ -1,7 +1,5 @@
 # MotionPathsExtraction
 
-UNDER CONSTRUCTION
-
 Multi object and classes detection and tracking pipeline to extract motion paths of objects like vehicles and pedestrians from videos.
 
 #### Please note:
@@ -54,7 +52,7 @@ Tested with:
 - Dual-GPU: 2 x NVIDIA GeForce GTX 1080ti 11 GB (Ubuntu 16.04, python 2.7, CUDA 9.0, cuDNN 7.1.3, Driver 384.111, TensorFlow 1.8.1, Caffe2 0.7.0 , OpenCV 3.4, Chainer 5.3.0, Cupy 5.1.0, , ChainerCV 0.10)
 - NVIDIA GeForce RTX 2070 8 GB (Ubuntu 18.04, python 3.6, CUDA 10.0, cuDNN 7.3.1, Driver 418.43, TensorFlow 1.11.0, PyTorch (Caffe2) 1.0.1, OpenCV 3.4, Chainer 5.3.0, Cupy 5.1.0 , ChainerCV 0.10)
 
-I have installed Anaconda ([from here](https://www.anaconda.com/distribution/#linux)) to create an environment and to install components.
+I installed Anaconda ([from here](https://www.anaconda.com/distribution/#linux)) to create an environment and to install components.
 For example:
 
 
@@ -233,12 +231,12 @@ Use the GUI or the config.ini to change and test detector or tracker related par
 
 Two parameter to mention:
 
-`per_process_gpu_mem_fraction = 0.1` is set here depending on used GPU. It is necessary to make sure that the GPU can load both, the detector and the tracker model, at the same time to be able to initialize detector and tracker at the begnning of the pipeline and not for each frame or detector and tracker sequencially.  
+`per_process_gpu_mem_fraction = 0.1` is set here depending on used GPU. It is necessary to make sure that the GPU can load both, the detector and the tracker model, at the same time to be able to initialize detector and tracker at the beginning of the pipeline and not for each frame or detector and tracker sequentially.  
 
 `imutils_queue_size = 128` sets the input buffer queue size. 0 is infinite. Imagine, that this queue will got filled fast if input frame rate is higher than processing framerate. Thanks to [imutils](https://github.com/jrosebr1/imutils) for providing this out-of-the-box.
 
 
-[This](https://github.com/facebookresearch/Detectron) page provides detailed informations about Facebooks tracker Detectron and its Model Zoo.
+[This](https://github.com/facebookresearch/Detectron) page provides detailed information about Facebooks tracker Detectron and its Model Zoo.
 Here is a end-to-end trained Mask R-CNN model with a ResNet-101-FPN backbone from [here](https://dl.fbaipublicfiles.com/detectron/35861858/12_2017_baselines/e2e_mask_rcnn_R-101-FPN_2x.yaml.02_32_51.SgT4y1cO/output/train/coco_2014_train%3Acoco_2014_valminusminival/generalized_rcnn/model_final.pkl) used.
 All models based on the [COCO dataset](http://cocodataset.org/#home).
 
