@@ -37,7 +37,7 @@ We also make use of [ChainerCV](https://github.com/chainer/chainercv) and its de
 * yolo_v2_voc0712_converted
 * yolo_v3_voc0712_converted
 
-![Poster](/poster/poster_A0_tracks.jpg?raw=true "MotionPathsExtraction")
+![Poster](/poster/poster_A0.jpg?raw=true "MotionPathsExtraction")
 
 ## Prerequisites: ###
 
