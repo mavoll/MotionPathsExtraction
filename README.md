@@ -2,8 +2,6 @@
 
 UNDER CONSTRUCTION
 
-
-empfehle papers
 Multi object and classes detection and tracking pipeline to extract motion paths of objects like vehicles and pedestrians from videos.
 
 #### Please note:
@@ -14,6 +12,12 @@ This approach does not implement it´s own detection and tracking algorithms but
   * others from the [Detectron Model Zoo](https://github.com/facebookresearch/Detectron/blob/master/MODEL_ZOO.md) can be used per config file and detectrons auto-download functionality
 * [SORT](https://github.com/abewley/sort) - A simple online and realtime tracking algorithm for 2D multiple object tracking in video sequences
 * [Deep SORT](https://github.com/nwojke/deep_sort) - Simple Online Realtime Tracking with a Deep Association Metric
+
+I recommend to have a look at:
+
+-  [Simple Online and Realtime Tracking](http://arxiv.org/abs/1602.00763)
+-  [Simple Online and Realtime Tracking with a Deep Association Metric](https://arxiv.org/abs/1703.07402)
+-  [Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](https://arxiv.org/pdf/1506.01497)
 
 We also make use of [ChainerCV](https://github.com/chainer/chainercv) and its detector implementations of FasterR-CNN, SSD and YOLO:
 * faster_rcnn_vgg16_voc0712_trained
@@ -237,13 +241,6 @@ Two parameter to mention:
 [This](https://github.com/facebookresearch/Detectron) page provides detailed informations about Facebooks tracker Detectron and its Model Zoo.
 Here is a end-to-end trained Mask R-CNN model with a ResNet-101-FPN backbone from [here](https://dl.fbaipublicfiles.com/detectron/35861858/12_2017_baselines/e2e_mask_rcnn_R-101-FPN_2x.yaml.02_32_51.SgT4y1cO/output/train/coco_2014_train%3Acoco_2014_valminusminival/generalized_rcnn/model_final.pkl) used.
 All models based on the [COCO dataset](http://cocodataset.org/#home).
-
-Pre-generated detections and the CNN checkpoint file for the tracker deep_sort has been downloaded from [here](https://drive.google.com/drive/folders/18fKzfqnqhqW3s9zwsCbnVJ5XF2JFeqMp) and can be found here:
-```
-MotionPathsExtraction/deep_sort/resources/networks/
-```
-More information about the tracker deep_sort, its training and its options can be found [here](https://github.com/nwojke/deep_sort).
-
 
 **Detectron Troubleshooting**
 
