@@ -252,7 +252,7 @@ All models based on the [COCO dataset](http://cocodataset.org/#home).
 
 ## Multi GPU batch usage (dataset-level): ###
 
-Only on dataset level, because tracker and detector models fit into one GPU at the same time so using multiple processes (Pythons processing) and instances, one per GPU, to batch process bigger input data should be ok.  
+Only on dataset level, because tracker and detector models fit into one GPU at the same time so using multiple processes (Pythons multiprocessing) and instances, one per GPU, to batch process bigger input data should be ok.  
 
 ## Further Usage based on the tracking results: ##
 
