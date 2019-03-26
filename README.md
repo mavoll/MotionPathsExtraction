@@ -251,24 +251,24 @@ All models based on the [COCO dataset](http://cocodataset.org/#home).
 ## Usage: ##
 
 <p align="center">
-  <img src="/images/gui.png" width="450" align="middle">
-  <img src="/images/config_gui.png" width="150" align="middle">
+  <img src="/images/gui.png" width="150" align="middle">
+  <img src="/images/config_gui.png" width="450" align="middle">
 </p>
 
 <p align="center">
-  <img src="/images/logging_window.png" width="450" align="middle">
+  <img src="/images/logging_window.png" width="600" align="middle">
 </p>
 
 <p align="center">
-  <img src="/images/maskrcnn.png" width="450" align="middle">
+  <img src="/images/maskrcnn.png" width="600" align="middle">
 </p>
 
 <p align="center">
-  <img src="/images/fasterrcnn_deep_sort.png" width="450" align="middle">
+  <img src="/images/fasterrcnn_deep_sort.png" width="600" align="middle">
 </p>
 
 <p align="center">
-  <img src="/images/ssd.png" width="450" align="middle">
+  <img src="/images/ssd.png" width="600" align="middle">
 </p>
 
 ## Multi GPU batch usage (dataset-level): ###
