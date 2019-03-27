@@ -242,9 +242,9 @@ class App(object):
                                 
                             frame_id += 1                              
 
-                    except Exception:
-                        print(sys.exc_info()[0] + sys.exc_info()[1])     
-                        #continue
+                except Exception:
+                    print(sys.exc_info()[0] + sys.exc_info()[1])     
+                    #continue
             
             if self.app_save_det_result_boxes:                                
                 self.save_det_result_boxes(all_boxes)    
