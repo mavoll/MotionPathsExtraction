@@ -156,12 +156,12 @@ class App(object):
                 
                 time.sleep(0.001)
                 
-                if frame_id % self.app_process_every_nth_frame == 0:
-                            
-                    try:
+                try:
                         
-                        self.image = file_stream.read()
-                        
+                    self.image = file_stream.read()
+                
+                    if frame_id % self.app_process_every_nth_frame == 0:                            
+                                           
                         if(self.image is not None):
 
                             vis = self.image.copy()                            
