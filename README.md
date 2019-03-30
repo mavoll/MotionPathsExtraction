@@ -74,21 +74,6 @@ conda info
 conda update conda
 ```
 ```
-wget https://repo.anaconda.com/archive/Anaconda3-2018.12-Linux-x86_64.sh
-```
-```
-bash Anaconda3-2018.12-Linux-x86_64.sh
-```
-```
-source ~/.bashrc
-```
-```
-conda info
-```
-```
-conda update conda
-```
-```
 conda update anaconda
 ```
 ```
