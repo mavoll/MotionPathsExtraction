@@ -279,3 +279,4 @@ Detectron/
 sort/
 bulk_config.ini
 *.ini
+*.ini
