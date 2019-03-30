@@ -60,38 +60,56 @@ class LoggingQueueHandler(logging.Handler):
 
 class App(object):
     
-    def __init__(self):
+    def __init__(self, bulk_processing=False, gpu_id=None, config_file=None, input_folder=None, output_folder=None):
         
         self.root = Tk()
-        self.v_1: IntVar = IntVar()        
-        self.v_2: IntVar = IntVar()        
-        self.v_3: IntVar = IntVar()
-        self.v_4: IntVar = IntVar()
-        self.v_5: IntVar = IntVar()
-        self.v_detector_to_use: StringVar = StringVar()
-        self.v_tracker_to_use: StringVar = StringVar()
-        self.v_detectron_model: StringVar = StringVar()
-        self.v_chainer_model: StringVar = StringVar()
-        
+        self.bulk_processing = bulk_processing
         self.cam = None
         self.cam_id = 0
         self.input_source = None
         self.source_changed = False
         self.opencv_thread = None
-
-        self.chainercv_models = ['yolo_v2', 'yolo_v3', 'yolo_v2_tiny', 
-                               'ssd300', 'ssd512', 
-                               'fasterrcnnvgg16', 'fasterrcnnfpnresnet50', 'fasterrcnnfpnresnet101']
         
-        self.detectron_models = ['e2emaskrcnnR101FPN2x', 'e2efasterrcnnR101FPN2x', 'use config file settings']
+        if self.bulk_processing:  
+            
+            workspace.GlobalInit(['caffe2', '--caffe2_log_level=0'])
+            self.load_config_file(config_file)            
+            self.app_gpu = gpu_id
+            self.input_source = input_folder
+            self.app_save_det_result_path = output_folder
+            self.app_save_tracking_result_path = output_folder
+            self.app_display = False
+            self.app_display_det_result_img = False
+            self.app_display_tracking_result_img = False
+            self.setup_logging(__name__)                       
+            self.logger = logging.getLogger(__name__)
+            
         
-        self.trackers = ['deep_sort', 'sort']
-        
-        self.detectors = ['detectron', 'chainer']
-        
-        self.load_config_file('config.ini')
-        
-        self.logger = logging.getLogger(__name__)
+        else:   
+            self.v_1: IntVar = IntVar()        
+            self.v_2: IntVar = IntVar()        
+            self.v_3: IntVar = IntVar()
+            self.v_4: IntVar = IntVar()
+            self.v_5: IntVar = IntVar()
+            self.v_detector_to_use: StringVar = StringVar()
+            self.v_tracker_to_use: StringVar = StringVar()
+            self.v_detectron_model: StringVar = StringVar()
+            self.v_chainer_model: StringVar = StringVar()           
+            
+    
+            self.chainercv_models = ['yolo_v2', 'yolo_v3', 'yolo_v2_tiny', 
+                                   'ssd300', 'ssd512', 
+                                   'fasterrcnnvgg16', 'fasterrcnnfpnresnet50', 'fasterrcnnfpnresnet101']
+            
+            self.detectron_models = ['e2emaskrcnnR101FPN2x', 'e2efasterrcnnR101FPN2x', 'use config file settings']
+            
+            self.trackers = ['deep_sort', 'sort']
+            
+            self.detectors = ['detectron', 'chainer']
+            
+            self.load_config_file('config.ini')
+            
+            self.logger = logging.getLogger(__name__)
         
     def run(self):
         self.main_window = main_window.MainWindow(self)        
@@ -118,7 +136,11 @@ class App(object):
             self.input_source = filename
             self.source_changed = True
             self.start_video()
-
+            
+    def start_bulk_process(self):
+            self.start_video()
+            self.root.mainloop()
+            
     def start_video(self):
         if self.opencv_thread is None:            
             self.source_changed = False
@@ -256,7 +278,9 @@ class App(object):
                 
             file_stream.stop()
             self.source_changed = False
-            self.start_processing()
+            
+            if not self.bulk_processing:
+                self.start_processing()
 
     def initializeDetector(self):
                 
@@ -270,8 +294,6 @@ class App(object):
         elif self.app_detector_to_use == 'detectron':
             
             cfg.immutable(False)
-            
-            str(self.detectron_download_cache)
             
             if self.detectron_model == 'e2emaskrcnnR101FPN2x':
                 detectron_cfg_tmp = 'Detectron/configs/12_2017_baselines/e2e_mask_rcnn_R-101-FPN_2x.yaml'
@@ -587,7 +609,8 @@ class App(object):
                 if self.opencv_thread is not None:
                         self.source_changed = True
                 
-                self.update_main_gui()
+                if not self.bulk_processing:
+                    self.update_main_gui()
                 
         except Exception:
 
@@ -804,8 +827,13 @@ class App(object):
         self.root.update()
     
     def show_logging_window(self):
-        self.window = Toplevel(self.root)
-        self.window.wm_title("Infos")
+        
+        if self.bulk_processing:
+            self.window = self.root
+        else:
+            self.window = Toplevel(self.root)
+        
+        self.window.wm_title("Process/GPU: " + str(self.app_gpu))
         self.window.resizable(width=True, height=True)
         self.window.attributes('-topmost', True)
                 
