@@ -269,7 +269,7 @@ SSD and SORT (here 15 FPS on GeForce RTX2070 8GB):
   <img src="/images/ssd.png" width="800" align="middle">
 </p>
 
-You have to consider, that if you want to have a Faster R-CNN -powerful detection engine running almost in real-time, than it might be possible or good enought with limited FPS. But if you also need to get good tracking results with less identity switches, than you need to feed your tracker with >20 FPS. So a real-time detection/tracking pipeline (with Detections of Pedestrians on Faster R-CNN level) is hard to archive (especially with mobile Hardware like NVIDIA Jetson TX2 but also not possible with cards like GTX 1080 Ti 11GB or RTX 2070 8GB). SSD with SORT runs on NVIDIA TX2 almost fluently. See later results.
+You have to consider, that if you want to have a Faster R-CNN -powerful detection engine running almost in real-time, than it might be possible or good enough with limited FPS. But if you also need to get good tracking results with less identity switches, than you need to feed your tracker with >20 FPS. So a real-time detection/tracking pipeline (with Detections of Pedestrians on Faster R-CNN level) is hard to archive (especially with mobile Hardware like NVIDIA Jetson TX2 but also not possible with cards like GTX 1080 Ti 11GB or RTX 2070 8GB). SSD with SORT runs on NVIDIA TX2 almost fluently. See later results.
 
 ## Multi GPU batch usage (dataset-level): ###
 
@@ -318,10 +318,11 @@ Install QGIS like [here](https://freegistutorial.com/how-to-install-qgis-on-ubun
   * Due to tracking-related identity switches this approach produces (depending on the crowded scene) shorter and fractional trajectories compared for example with approaches using mobile GPS devices to produce long and unique tracks. 
   * We are using multiple cams and perspectives to observe the whole plaza. Those perspectives only overlap at the edges. 
 * Corresponding research questions:
-  * Besides improvement within the field of multiple object detection and tracking producing less and less identy switches, is it possible to develop a post-processing process to re-connect corresponding trajectories or to generalize those trajectories in order to use well known analysis techniques requireing longer trajectories.
+  * Besides improvement within the field of multiple object detection and tracking producing less and less identity switches, is it possible to develop a post-processing process to re-connect corresponding trajectories or to generalize those trajectories in order to use well known analysis techniques requiring longer trajectories.
   * How to connect the trajectories from diffenet perspectives if objects moving from one perspective/cam to another.
-  * Find a metric (besides multiple object detection as well as tracking challanges like for example the MOT challange) to evaluate the whole process of trajectory extraction focusing on the needs of social scientists and there requirements on the data to be able to produce significant experiments. 
-  * State-of-the-art path manipulation and analysis keeping our specific circumstances in mind.   
+  * Find a metric (besides multiple object detection as well as tracking challenges like for example the MOT challange) to evaluate the whole process of trajectory extraction focusing on the needs of social scientists and there requirements on the data to be able to produce significant experiments. 
+  * State-of-the-art path manipulation and analysis keeping our specific circumstances in mind.
+  * Using extracted real motion paths of vehicles and pedestrians to train, test and evaluate Agent-based simulation models?
 
 
 ## Authors
