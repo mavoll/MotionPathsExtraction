@@ -283,7 +283,7 @@ Use the [CountingTool](https://github.com/mavoll/TrafficCountingTool) to draw li
 
 ### Mapping
 
-Use the [Mapping](?) to map pixel coordinates to geo-coordinates.
+Use the [Mapping](https://github.com/mavoll/SimpleTPSMapping) to map pixel coordinates to geo-coordinates.
 
 ### Animate and analyze tracks
 
@@ -311,6 +311,18 @@ Install QGIS like [here](https://freegistutorial.com/how-to-install-qgis-on-ubun
 [SparkPipeline](https://github.com/mavoll/SparkPipeline)
 
 #### Using Apache Zeppelin and Spark to analyze and visualize tracks
+
+## Further development and research opportunities
+
+* Use-case specific circumstances:
+  * Due to tracking-related identity switches this approach produces (depending on the crowded scene) shorter and cuttet trajectories compared for example with approaches using unique and mobile GPS devices to produce long tracks. 
+  * We are using multiple cams and perspectives to observe the whole plaza. Those perspectives only overlap at the edges. 
+* Corresponding research questions:
+  * Besides improvement within the field of multiple object detection and tracking producing less and less identy switches, is it possible to develop a post-processing process to re-connect corresponding trajectories or to generalize those trajectories in order to use well known analysis techniques requireing longer trajectories.
+  * How to connect the trajectories from diffenet perspectives if objects moving from one perspective/cam to another.
+  * Find a metric (besides multiple object detection as well as tracking challanges like for example the MOT challange) to evaluate the whole process of trajectory extraction focusing on the needs of social scientists and there requirements on the data to be able to produce significant experiments. 
+  * State-of-the-art path manipulation and analysis keeping our specific circumstances in mind.   
+
 
 ## Authors
 
