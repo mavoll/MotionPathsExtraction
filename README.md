@@ -315,7 +315,7 @@ Install QGIS like [here](https://freegistutorial.com/how-to-install-qgis-on-ubun
 ## Further development and research opportunities
 
 * Use-case specific circumstances:
-  * Due to tracking-related identity switches this approach produces (depending on the crowded scene) shorter and cuttet trajectories compared for example with approaches using unique and mobile GPS devices to produce long tracks. 
+  * Due to tracking-related identity switches this approach produces (depending on the crowded scene) shorter and fractional trajectories compared for example with approaches using mobile GPS devices to produce long and unique tracks. 
   * We are using multiple cams and perspectives to observe the whole plaza. Those perspectives only overlap at the edges. 
 * Corresponding research questions:
   * Besides improvement within the field of multiple object detection and tracking producing less and less identy switches, is it possible to develop a post-processing process to re-connect corresponding trajectories or to generalize those trajectories in order to use well known analysis techniques requireing longer trajectories.
