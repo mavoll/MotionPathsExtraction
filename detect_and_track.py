@@ -46,7 +46,7 @@ import logging
 from chainercv.datasets import voc_bbox_label_names
 from collections import defaultdict
 
-c2_utils.import_detectron_ops()
+#c2_utils.import_detectron_ops()
 cv2.ocl.setUseOpenCL(False)
         
 class LoggingQueueHandler(logging.Handler):

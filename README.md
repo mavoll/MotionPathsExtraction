@@ -113,6 +113,9 @@ conda install -c mingfeima mkldnn
 conda install -c nnpack
 ```
 ```
+conda install -c conda-forge ffmpeg
+```
+```
 conda install -c conda-forge opencv=3.4
 ```
 ```
