@@ -282,3 +282,5 @@ bulk_config.ini
 *.ini
 *.ini
 output/tracks/tracking.csv
+bulk_config.ini
+config.ini
