@@ -322,7 +322,7 @@ Install QGIS like [here](https://freegistutorial.com/how-to-install-qgis-on-ubun
   * How to connect the trajectories from diffenet perspectives if objects moving from one perspective/cam to another.
   * Find a metric (besides multiple object detection as well as tracking challenges like for example the MOT challange) to evaluate the whole process of trajectory extraction focusing on the needs of social scientists and there requirements on the data to be able to produce significant experiments. 
   * State-of-the-art path manipulation and analysis keeping our specific circumstances in mind.
-  * Using extracted real motion paths of vehicles and pedestrians to train, test and evaluate Agent-based simulation models or to configurate models with help from real countings/statistics (for example the measured usual and real frequency and dwell time of Pedestrians and cars at specific time frames)?
+  * Using extracted real motion paths of vehicles and pedestrians to train, test and evaluate Agent-based simulation models or to configurate models with help from real countings/statistics (for example the measured usual and real frequency and dwell time of Pedestrians and cars at specific time and place)?
 
 
 ## Authors
