@@ -308,7 +308,7 @@ Use one of the python scripts  ??? to import tracks to PostGIS as LineStringM or
 
 Install QGIS like [here](https://freegistutorial.com/how-to-install-qgis-on-ubuntu-18-04-bionic-beaver/) and connect to the former installed and configured PostGIS.
 
-Short map animation examples:
+#### Short map animation examples (created using QGIS TimeManager):
 
 [points animation](https://drive.google.com/file/d/1RaxYcd6amxBYuJ8-cyD-YrJONbC3HBFw/view?usp=sharing)
 
