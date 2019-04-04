@@ -308,9 +308,13 @@ Use one of the python scripts  ??? to import tracks to PostGIS as LineStringM or
 
 Install QGIS like [here](https://freegistutorial.com/how-to-install-qgis-on-ubuntu-18-04-bionic-beaver/) and connect to the former installed and configured PostGIS.
 
-<video>
-<source src="/images/map_animation_heatmap_persons.mp4" type='video/mp4'>
-</video>
+Short map animation examples:
+
+[points animation](https://drive.google.com/file/d/1RaxYcd6amxBYuJ8-cyD-YrJONbC3HBFw/view?usp=sharing)
+
+[point cluster animation](https://drive.google.com/file/d/1BHM0dLm705j1DTThtmIYAvkwDjk1B2qL/view?usp=sharing)
+
+[heatmap animation](https://drive.google.com/file/d/1y_93ddwSI3TcItxy8eM7_P-pP9gDOply/view?usp=sharing)
 
 ### Tracks to the SparkPipeline
 
