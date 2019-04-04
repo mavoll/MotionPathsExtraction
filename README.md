@@ -308,12 +308,8 @@ Use one of the python scripts  ??? to import tracks to PostGIS as LineStringM or
 
 Install QGIS like [here](https://freegistutorial.com/how-to-install-qgis-on-ubuntu-18-04-bionic-beaver/) and connect to the former installed and configured PostGIS.
 
-<script src="http://vjs.zencdn.net/4.0/video.js"></script>
-
-<video id="pelican-installation" class="video-js vjs-default-skin" controls
-preload="auto" width="683" height="384"
-data-setup="{}">
-<source src="/static/screencasts/pelican-installation.mp4" type='video/mp4'>
+<video>
+<source src="/images/map_animation_heatmap_persons.mp4" type='video/mp4'>
 </video>
 
 ### Tracks to the SparkPipeline
