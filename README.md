@@ -331,7 +331,7 @@ Install QGIS like [here](https://freegistutorial.com/how-to-install-qgis-on-ubun
 * Corresponding research questions:
   * Besides improvement within the field of multiple object detection and tracking producing less and less identity switches, is it possible to develop a post-processing process to re-connect corresponding trajectories or to generalize those trajectories in order to use well known analysis techniques requiring longer trajectories.
   * How to connect the trajectories from diffenet perspectives if objects moving from one perspective/cam to another.
-  * Find a metric (besides multiple object detection as well as tracking challenges like for example the MOT challange) to evaluate the whole process of trajectory extraction focusing on the needs of social scientists and there requirements on the data to be able to produce significant experiments. 
+  * Find a metric (besides multiple object tracking challenges like for example the [MOT challange]{https://arxiv.org/pdf/1603.00831.pdf}) to evaluate the whole process of trajectory extraction focusing on the needs of social scientists and there requirements on the data to be able to produce significant experiments. 
   * State-of-the-art path manipulation and analysis keeping our specific circumstances in mind.
   * Using extracted real motion paths of vehicles and pedestrians to train, test and evaluate Agent-based simulation models or to configurate models with help from real countings/statistics (for example the measured usual and real frequency and dwell time of Pedestrians and cars at specific time and place)?
 
