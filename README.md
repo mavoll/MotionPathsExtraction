@@ -274,6 +274,8 @@ SSD and SORT (here 15 FPS on GeForce RTX2070 8GB):
 
 You have to consider, that if you want to have a Faster R-CNN -powerful detection engine running almost in real-time, than it might be possible or good enough with limited FPS. But if you also need to get good tracking results with less identity switches, than you need to feed your tracker with >20 FPS. So a real-time detection/tracking pipeline (with Detections of Pedestrians on Faster R-CNN level) is hard to archive (especially with mobile Hardware like NVIDIA Jetson TX2 but also not possible with cards like GTX 1080 Ti 11GB or RTX 2070 8GB). SSD with SORT runs on NVIDIA TX2 almost fluently. See later results.
 
+If you have use-cases in mind requiring streaming images from multiple computers/Pis to an processing server, than check [pyimagesearch’s post](https://www.pyimagesearch.com/2019/04/15/live-video-streaming-over-network-with-opencv-and-imagezmq) and [imagezmq](https://github.com/jeffbass/imagezmq).
+
 ## Multi GPU batch usage (dataset-level): ###
 
 Only on dataset level, because tracker and detector models fit into one GPU at the same time so using multiple processes (Pythons multiprocessing) and instances, one per GPU, to batch process bigger input data should be ok.  
