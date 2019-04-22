@@ -121,8 +121,9 @@ pip install opencv-contrib-python==3.4.4.19
 ```
 conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
 ```
+pip install https://download.pytorch.org/whl/cu100/torch-1.0.1.post2-cp36-cp36m-linux_x86_64.whl
 ```
-conda install tensorflow-gpu
+pip install tensorflow-gpu
 ```
 ```
 conda install scikit-learn
