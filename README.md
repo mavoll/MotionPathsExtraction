@@ -116,10 +116,7 @@ conda install -c nnpack
 conda install -c conda-forge ffmpeg
 ```
 ```
-conda install -c conda-forge opencv=3.4
-```
-```
-conda install opencv-contrib-python
+pip install opencv-contrib-python==3.4.4.19
 ```
 ```
 conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
