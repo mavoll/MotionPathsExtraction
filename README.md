@@ -229,6 +229,8 @@ torch.__version__
 caffe2.__version__
 ```
 
+If you used to install old caffe2, the old caffe2 libcaffe2.so, libcaffe2_detectron_ops_gpu.so, libcaffe2_gpu.so, libcaffe2_module_test_dynamic.so, libcaffe2_observers.so is in /usr/local/lib, but now new installed caffe2 they all in pytorch/build/lib. Make sure to delete all in /usr/local/lib.
+
 ## Install: ##
 
 ```
@@ -258,8 +260,6 @@ git clone https://github.com/nwojke/deep_sort.git
 ```
 git clone https://github.com/abewley/sort.git
 ```
-
-If you used to install old caffe2, the old caffe2 libcaffe2.so, libcaffe2_detectron_ops_gpu.so, libcaffe2_gpu.so, libcaffe2_module_test_dynamic.so, libcaffe2_observers.so is in /usr/local/lib, but now new installed caffe2 they all in pytorch/build/lib. Make sure to delete all in /usr/local/lib.
 
 ### Download Resources: ###
 
