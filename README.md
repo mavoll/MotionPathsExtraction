@@ -84,6 +84,7 @@ sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/machine-lea
 ```
 sudo apt update
 ```
+```
 sudo apt install cuda-drivers=410.104-1
 ```
 ```
