@@ -38,6 +38,7 @@ We also make use of [ChainerCV](https://github.com/chainer/chainercv) and its de
 - Python 2.7 or 3.6 (not 3.7)
 - OpenCV 3.4 (not 4)
 - Caffe2 >= 0.7.0 or PyTorch >= 1.0 (to do inference and training with detector Detectron)
+- PyYAML == 3.12
 - COCO API (see [here](https://github.com/mavoll/MotionPathsExtraction/blob/master/Detectron/INSTALL.md#coco) and [here](https://github.com/cocodataset/cocoapi))
 - TensorFlow >= 1.4.0 (person re-identification feature generation for tracker deep_sort)
 - Chainer >= 4
@@ -55,6 +56,76 @@ Tested with:
 I installed Anaconda ([from here](https://www.anaconda.com/distribution/#linux)) to create an environment and to install components.
 For example:
 
+### Install cuda and cudnn: ###
+```
+sudo rm /etc/apt/sources.list.d/cuda*
+```
+```
+sudo apt remove nvidia-cuda-toolkit
+```
+```
+sudo apt remove nvidia-*
+```
+```
+sudo apt update
+```
+```
+sudo add-apt-repository ppa:graphics-drivers/ppa
+```
+```
+sudo apt-key adv --fetch-keys  http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+```
+```
+sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda.list'
+```
+```
+sudo bash -c 'echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda_learn.list'
+```
+```
+sudo apt update
+```
+```
+sudo apt install cuda-drivers=410.104-1
+```
+```
+sudo apt install cuda-runtime-10-0
+```
+```
+sudo apt install cuda-10-0
+```
+```
+sudo apt install libcudnn7
+```
+```
+nvidia-smi
+```
+```
+nvcc --version
+```
+```
+sudo apt install cuda-toolkit-10-0
+```
+```
+export PATH=/usr/local/cuda-10.0/bin${PATH:+:${PATH}}
+```
+```
+export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+```
+
+Add to `~/.profile':
+
+```
+PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+
+# set PATH for cuda 10.0 installation
+if [ -d "/usr/local/cuda-10.0/bin/" ]; then
+    export PATH=/usr/local/cuda-10.0/bin${PATH:+:${PATH}}
+    export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+fi
+```
+```
+sudo reboot
+```
 
 ### Install Anaconda: ###
 
@@ -110,19 +181,19 @@ conda install numpy pyyaml matplotlib setuptools scipy protobuf future mkl mkl-i
 conda install -c mingfeima mkldnn
 ```
 ```
-conda install -c nnpack
+conda install nnpack
 ```
 ```
 conda install -c conda-forge ffmpeg
 ```
 ```
-conda install -c conda-forge opencv=3.4
+pip install opencv-contrib-python==3.4.4.19
 ```
 ```
-conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
+pip install https://download.pytorch.org/whl/cu100/torch-1.0.1.post2-cp36-cp36m-linux_x86_64.whl
 ```
 ```
-conda install tensorflow-gpu
+pip install tensorflow-gpu
 ```
 ```
 conda install scikit-learn
@@ -134,7 +205,7 @@ conda install -c hcc pycocotools
 conda install -c anaconda chainer
 ```
 ```
-conda install cupy
+pip install cupy
 ```
 ```
 pip install chainercv
@@ -157,6 +228,8 @@ tf.__version__
 torch.__version__
 caffe2.__version__
 ```
+
+If you used to install old caffe2, the old caffe2 libcaffe2.so, libcaffe2_detectron_ops_gpu.so, libcaffe2_gpu.so, libcaffe2_module_test_dynamic.so, libcaffe2_observers.so is in /usr/local/lib, but now new installed caffe2 they all in pytorch/build/lib. Make sure to delete all in /usr/local/lib.
 
 ## Install: ##
 
@@ -294,21 +367,100 @@ Use the [Mapping](https://github.com/mavoll/SimpleTPSMapping) to map pixel coord
 
 #### Import tracking results to PostGIS
 
+Install QGIS:
+```
+sudo sh -c 'echo "deb http://qgis.org/debian bionic main " >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb-src http://qgis.org/debian bionic main " >> /etc/apt/sources.list'
+sudo apt update
+sudo apt install qgis python3-qgis qgis-plugin-grass
+```
+
 Install PostGIS:
 ```
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt bionic-pgdg main" >> /etc/apt/sources.list'
 wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -
 sudo apt update
-sudo apt-get install postgresql-11-postgis-2.5
+sudo apt install postgresql-11-postgis-2.5
 sudo apt install postgis
-```
-For configuration see [here](http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS24UbuntuPGSQL10Apt).
 
-Use one of the python scripts  ??? to import tracks to PostGIS as LineStringM or PointM data.
+sudo -u postgres psql
+CREATE EXTENSION adminpack;
+CREATE DATABASE gisdb;
+\connect gisdb;
+CREATE SCHEMA postgis;
+ALTER DATABASE gisdb SET search_path=public, postgis, contrib;
+\connect gisdb;
+CREATE EXTENSION postgis SCHEMA postgis;
+
+CREATE EXTENSION postgis_sfcgal SCHEMA postgis;
+
+\password postgres
+```
+
+For more PostGIS configuration see [here](http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS24UbuntuPGSQL10Apt).
+
+Create tracks table (geometry Point):
+```
+CREATE TABLE postgis.tracks_points_per_sec
+(
+  slice text NOT NULL,
+  cam text NOT NULL,
+  day text NOT NULL,
+  part integer NOT NULL,
+  subpart integer NOT NULL,
+  track_id integer NOT NULL,
+  time timestamp NOT NULL,
+  track_class text NOT NULL,
+  geom geometry(Point, 5555) NOT NULL,
+  PRIMARY KEY (slice, cam, day, part, subpart, track_id, time)
+);
+
+```
+Import to postgis.tracks_points_per_sec from georeferenced tracks in csv file:
+```
+python scripts/insert_csv_tracks_into_postgis_point_date_sec.py -r 25 -y 1521027720 -e 'gisdb' -u 'postgres' -w 'postgres' -f 'scripts/geo_ref_tracks.csv' -t 'tracks_points_per_sec' -s 'Testdatensatz' -d 'Testdatensatz' -p 1 -b 1 -i 'localhost' -x 5432
+```
+
+Create tracks table (geometry LineStringM):
+```
+CREATE TABLE postgis.tracks_linestrings_per_sec
+(
+  slice text NOT NULL,
+  cam text NOT NULL,
+  day text NOT NULL,
+  part integer NOT NULL,
+  subpart integer NOT NULL,
+  starttime timestamp NOT NULL,
+  endtime timestamp NOT NULL,
+  track_time_range tsrange NOT NULL,
+  frame_rate text NOT NULL,
+  track_class text NOT NULL,
+  track_id integer NOT NULL,
+  geom geometry(LineStringM, 5555),
+  PRIMARY KEY (slice, cam, day, part, subpart, track_id)
+);
+
+```
+Import to postgis.tracks_linestringm_per_sec from georeferenced tracks in csv file:
+```
+python scripts/insert_csv_tracks_into_postgis_linestringm_sec.py -r 25 -y 1521027720 -e 'gisdb' -u 'postgres' -w 'postgres' -f 'scripts/geo_ref_tracks.csv' -t 'tracks_linestrings_per_sec' -s 'Testdatensatz' -d 'Testdatensatz' -p 1 -b 1 -i 'localhost' -x 5432
+```
 
 #### Using QGIS and its TimeManager
 
-Install QGIS like [here](https://freegistutorial.com/how-to-install-qgis-on-ubuntu-18-04-bionic-beaver/) and connect to the former installed and configured PostGIS.
+Open QGIS and create new PostGIS connection (name: tracks, host: localhost, port: 5432, database: gisdb, user: postgres, password: postgres).
+Use QGIS DB Manager to check your tables tracks_linestrings_per_sec and tracks_points_per_sec.
+Install QGIS Plugin 'TimeManager' within QGIS GUI.
+Turn off the TimeManager.
+Add Layer OpenStreetMap from category xyz tiles and zoom to Domplatz.
+Add Layer tracks_points_per_sec from category PostGIS -> tracks -> postgis
+
+In tracks_points_per_sec Layer Properties in category 'Symbology' choose 'Categorized' select 'track_class' as column and classify. From the result list deselect all except 1 for person and 3 for car (to see only persons and cars and to give them different colors for the animation).
+
+Open TimeManager settings and add layer (layer: tracks_points_per_sec, start time: time, offset: 1, accumulate features: whateveryoulike). You can also use the tracks_linestrings_per_sec.
+Select for 'show frame for' 25 millisecs and as 'time frame size' 1 sec.
+
+Turn on TimeManager and play. 
 
 #### Short map animation examples (created using QGIS TimeManager):
 
