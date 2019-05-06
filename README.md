@@ -397,6 +397,8 @@ CREATE EXTENSION postgis_sfcgal SCHEMA postgis;
 \password postgres
 ```
 
+For more PostGIS configuration see [here](http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS24UbuntuPGSQL10Apt).
+
 Create tracks table (geometry Point):
 ```
 CREATE TABLE postgis.tracks_points_per_sec
@@ -421,7 +423,7 @@ python scripts/insert_csv_tracks_into_postgis_point_date_sec.py -r 25 -y 1521027
 
 Create tracks table (geometry LineStringM):
 ```
-CREATE TABLE tracks_linestrings_per_sec
+CREATE TABLE postgis.tracks_linestrings_per_sec
 (
   slice text NOT NULL,
   cam text NOT NULL,
@@ -444,15 +446,21 @@ Import to postgis.tracks_linestringm_per_sec from georeferenced tracks in csv fi
 python scripts/insert_csv_tracks_into_postgis_linestringm_sec.py -r 25 -y 1521027720 -e 'gisdb' -u 'postgres' -w 'postgres' -f 'scripts/geo_ref_tracks.csv' -t 'tracks_linestrings_per_sec' -s 'Testdatensatz' -d 'Testdatensatz' -p 1 -b 1 -i 'localhost' -x 5432
 ```
 
-For more PostGIS configuration see [here](http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS24UbuntuPGSQL10Apt).
-
-
-
-Use one of the python scripts  ??? to import tracks to PostGIS as LineStringM or PointM data.
-
 #### Using QGIS and its TimeManager
 
-Install QGIS like [here](https://freegistutorial.com/how-to-install-qgis-on-ubuntu-18-04-bionic-beaver/) and connect to the former installed and configured PostGIS.
+Open QGIS and create new PostGIS connection (name: tracks, host: localhost, port: 5432, database: gisdb, user: postgres, password: postgres).
+Use QGIS DB Manager to check your tables tracks_linestrings_per_sec and tracks_points_per_sec.
+Install QGIS Plugin 'TimeManager' within QGIS GUI.
+Turn off the TimeManager.
+Add Layer OpenStreetMap from category xyz tiles and zoom to Domplatz.
+Add Layer tracks_points_per_sec from category PostGIS -> tracks -> postgis
+
+In tracks_points_per_sec Layer Properties in category 'Symbology' choose 'Categorized' select 'track_class' as column and classify. From the result list deselect all except 1 for person and 3 for car (to see only persons and cars and to give them different colors for the animation).
+
+Open TimeManager settings and add layer (layer: tracks_points_per_sec, start time: time, offset: 1, accumulate features: whateveryoulike). You can also use the tracks_linestrings_per_sec.
+Select for 'show frame for' 25 millisecs and as 'time frame size' 1 sec.
+
+Turn on TimeManager and play. 
 
 #### Short map animation examples (created using QGIS TimeManager):
 
