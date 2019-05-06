@@ -393,11 +393,55 @@ ALTER DATABASE gisdb SET search_path=public, postgis, contrib;
 CREATE EXTENSION postgis SCHEMA postgis;
 
 CREATE EXTENSION postgis_sfcgal SCHEMA postgis;
+
+\password postgres
 ```
 
-Create tracks database:
+Create tracks table (geometry Point):
+```
+CREATE TABLE postgis.tracks_points_per_sec
+(
+  slice text NOT NULL,
+  cam text NOT NULL,
+  day text NOT NULL,
+  part integer NOT NULL,
+  subpart integer NOT NULL,
+  track_id integer NOT NULL,
+  time timestamp NOT NULL,
+  track_class text NOT NULL,
+  geom geometry(Point, 5555) NOT NULL,
+  PRIMARY KEY (slice, cam, day, part, subpart, track_id, time)
+);
+
+```
+Import to postgis.tracks_points_per_sec from georeferenced tracks in csv file:
+```
+python scripts/insert_csv_tracks_into_postgis_point_date_sec.py -r 25 -y 1521027720 -e 'gisdb' -u 'postgres' -w 'postgres' -f 'scripts/geo_ref_tracks.csv' -t 'tracks_points_per_sec' -s 'Testdatensatz' -d 'Testdatensatz' -p 1 -b 1 -i 'localhost' -x 5432
 ```
 
+Create tracks table (geometry LineStringM):
+```
+CREATE TABLE tracks_linestrings_per_sec
+(
+  slice text NOT NULL,
+  cam text NOT NULL,
+  day text NOT NULL,
+  part integer NOT NULL,
+  subpart integer NOT NULL,
+  starttime timestamp NOT NULL,
+  endtime timestamp NOT NULL,
+  track_time_range tsrange NOT NULL,
+  frame_rate text NOT NULL,
+  track_class text NOT NULL,
+  track_id integer NOT NULL,
+  geom geometry(LineStringM, 5555),
+  PRIMARY KEY (slice, cam, day, part, subpart, track_id)
+);
+
+```
+Import to postgis.tracks_linestringm_per_sec from georeferenced tracks in csv file:
+```
+python scripts/insert_csv_tracks_into_postgis_linestringm_sec.py -r 25 -y 1521027720 -e 'gisdb' -u 'postgres' -w 'postgres' -f 'scripts/geo_ref_tracks.csv' -t 'tracks_linestrings_per_sec' -s 'Testdatensatz' -d 'Testdatensatz' -p 1 -b 1 -i 'localhost' -x 5432
 ```
 
 For more PostGIS configuration see [here](http://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS24UbuntuPGSQL10Apt).
