@@ -46,7 +46,7 @@ import logging
 from chainercv.datasets import voc_bbox_label_names
 from collections import defaultdict
 
-#c2_utils.import_detectron_ops()
+c2_utils.import_detectron_ops()
 cv2.ocl.setUseOpenCL(False)
         
 class LoggingQueueHandler(logging.Handler):
@@ -418,7 +418,8 @@ class App(object):
             return tracker_deep_sort.DeepSortTracker(self.deep_sort_feature_model, 
                                                      self.deep_sort_max_cosine_distance, 
                                                      self.deep_sort_nn_budget, 
-                                                     self.deep_sort_per_process_gpu_mem_fraction)
+                                                     self.deep_sort_per_process_gpu_mem_fraction,
+                                                     self.app_gpu)
             
         elif self.app_tracker_to_use == 'sort':
             

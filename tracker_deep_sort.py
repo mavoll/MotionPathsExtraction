@@ -13,15 +13,14 @@ from deep_sort.deep_sort import iou_matching
 
 class DeepSortTracker:
     
-    def __init__(self, deep_sort_feature_model, deep_sort_max_cosine_distance, deep_sort_nn_budget, per_process_gpu_mem_fraction):
+    def __init__(self, deep_sort_feature_model, deep_sort_max_cosine_distance, deep_sort_nn_budget, per_process_gpu_mem_fraction, app_gpu):
         
         metric = nn_matching.NearestNeighborDistanceMetric(
                     "cosine", deep_sort_max_cosine_distance, deep_sort_nn_budget)
         self.tracker = Tracker(metric)
         
-        self.encoder = DeepSortTracker.create_box_encoder(deep_sort_feature_model, batch_size=32, per_process_gpu_mem_fraction=0.1)
-        
-        
+        self.encoder = DeepSortTracker.create_box_encoder(deep_sort_feature_model, batch_size=32, per_process_gpu_mem_fraction=0.1, app_gpu=0)
+                
     def track(self, vis, cls_boxes, frame_id, deep_sort_min_detection_height, deep_sort_min_confidence, deep_sort_nms_max_overlap):
         
         tracking_boxes = []
@@ -68,8 +67,8 @@ class DeepSortTracker:
         return deep_sort_boxes
 
     def create_box_encoder(model_filename, input_name="images",
-        output_name="features", batch_size=32, per_process_gpu_mem_fraction=0.1):
-        image_encoder = DeepSortImageEncoder(model_filename, input_name, output_name, per_process_gpu_mem_fraction)
+        output_name="features", batch_size=32, per_process_gpu_mem_fraction=0.1, app_gpu=0):
+        image_encoder = DeepSortImageEncoder(model_filename, input_name, output_name, per_process_gpu_mem_fraction, app_gpu)
         image_shape = image_encoder.image_shape
     
         def encoder(image, boxes):
@@ -593,9 +592,10 @@ class DeepSortImageEncoder(object):
 
     def __init__(self, checkpoint_filename, input_name="images",
                  output_name="features",
-                 per_process_gpu_mem_fraction=0.1):
+                 per_process_gpu_mem_fraction=0.1,
+                 app_gpu=0):
         
-        config = tf.ConfigProto()
+        config = tf.ConfigProto(device_count = {'GPU': app_gpu})
         config.gpu_options.per_process_gpu_memory_fraction = per_process_gpu_mem_fraction      
         self.session = tf.Session(config=config)
         with tf.gfile.GFile(checkpoint_filename, "rb") as file_handle:

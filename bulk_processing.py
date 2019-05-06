@@ -20,7 +20,8 @@ class BulkProcessor(object):
         self.gpu_ids = config.items( "Gpus" )
         self.configs = config.items( "Configs" )
         self.inputs = config.items( "Input" )
-        self.outputs = config.items( "Output" )
+        self.num_instances = config.items( "Instances_per_gpu" )
+        self.file_types = config.items( "File_type" )
         
         if len(self.gpu_ids) < 1 or len(self.gpu_ids) > num_nvidia_gpus:
         	sys.exit('Number of processors to use must be greater than 0 and smaller than gpus available')
@@ -34,7 +35,7 @@ class BulkProcessor(object):
         
         try:
             
-            process = detect_and_track.App(True, int(self.gpu_ids[i][1]), str(self.configs[i][1]), str(self.inputs[i][1]), str(self.outputs[i][1]))
+            process = detect_and_track.App(True, int(self.gpu_ids[i][1]), str(self.configs[i][1]), str(self.inputs[i][1]), str(self.file_types[i][1]))
             process.start_bulk_process()
 
             print("Process on GPU %d stopped" % int(self.gpu_ids[i][1]))

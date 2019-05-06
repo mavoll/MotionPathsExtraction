@@ -7,11 +7,11 @@ def insert_track(self, track):
         
     table = self.args['postgretable']
     
-    sql = "INSERT INTO " + table + "(slice, day, cam, part, subpart, track_id, track_class, sec, time, geom) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,ST_GeomFromEWKT(%s))"
+    sql = "INSERT INTO " + table + "(slice, cam, day, part, subpart, track_id, time, track_class, geom) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,ST_GeomFromEWKT(%s))"
           
     try:
         self._cur.execute(sql,track)
-        # self._conn.commit()
+        self._conn.commit()
            
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)    
@@ -78,8 +78,6 @@ class App(object):
 
 
     def run(self):
-
-        # VALUES  (track_id, 1, 4, 'Testdatensatz', 1, 1, track_class, starttime, endtime, 25, LineStringM),
         
         with open(self.args['track_file_path'], 'r') as csv_file:
 
@@ -91,8 +89,8 @@ class App(object):
                 day = self.args['day']
                 part = self.args['part']
                 subpart = self.args['subpart']
-                subpartstarttime = self.args['subpartstarttime']
-                framerate = self.args['framerate']
+                subpartstarttime = int(self.args['subpartstarttime'])
+                framerate = int(self.args['framerate'])
 
                 for row in csv_reader:
                 
@@ -106,9 +104,9 @@ class App(object):
                     
                     timestamp = datetime.datetime.fromtimestamp(subpartstarttime) + datetime.timedelta(milliseconds = (image_id / framerate) * 1000)
                                 
-                    point = 'SRID=5555;POINT(%s %s)' % (str(x_utm), str(y_utm))
+                    point = 'SRID=5555;POINT({0} {1})'.format(str(x_utm), str(y_utm))
                     
-                    insert_track(self, (slicee, day, cam, part, subpart, track_id, track_class, timestamp.strftime('%Y-%m-%d %H:%M:%S'), timestamp.strftime('%Y-%m-%d %H:%M:%S'), point))
+                    insert_track(self, (slicee, cam, day, part, subpart, track_id, timestamp.strftime('%Y-%m-%d %H:%M:%S'), track_class, point))
                                                 
                     line_count += 1
        

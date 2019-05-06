@@ -6,11 +6,11 @@ import psycopg2
 def insert_track(self, track):       
         
     table = self.args['postgretable']
-    sql = "INSERT INTO " + str(table) + "(slice, day, cam, part, subpart, starttime, endtime, track_time_range, frame_rate, track_class, track_id, geom) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,ST_GeomFromEWKT(%s))"
+    sql = "INSERT INTO " + str(table) + "(slice, cam, day, part, subpart, starttime, endtime, track_time_range, frame_rate, track_class, track_id, geom) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,ST_GeomFromEWKT(%s))"
           
     try:
         self._cur.execute(sql,track)
-        # self._conn.commit()
+        self._conn.commit()
            
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)    
@@ -78,8 +78,6 @@ class App(object):
 
     def run(self):
 
-        # VALUES  (track_id, 1, 4, 'Testdatensatz', 1, 1, track_class, starttime, endtime, 25, LineStringM),
-        
         with open(self.args['track_file_path'], 'r') as csv_file:
 
                 csv_reader = csv.reader(csv_file, delimiter=',')
@@ -89,8 +87,8 @@ class App(object):
                 day = self.args['day']
                 part = self.args['part']
                 subpart = self.args['subpart']
-                subpartstarttime = self.args['subpartstarttime']
-                framerate = self.args['framerate']
+                subpartstarttime = int(self.args['subpartstarttime'])
+                framerate = int(self.args['framerate'])
                 
                 former_track_id = None
                 first_track_img_num = None
