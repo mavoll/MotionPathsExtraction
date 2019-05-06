@@ -10,7 +10,7 @@ def insert_track(self, track):
           
     try:
         self._cur.execute(sql,track)
-        self._conn.commit()
+        #self._conn.commit()
            
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)    
@@ -106,62 +106,61 @@ class App(object):
                                         
                     x_utm = row[13]                    
                     y_utm = row[14]
+         
+# crazy, next try with pandas
                     
-                    if(track_class == 1 or track_class == 2 or track_class == 3 or track_class == 4 or track_class == 6 or track_class == 8):
-                    
-                        if former_track_id is None:
-                            
-                            former_track_id = track_id
-                            former_track_class = track_class
-                            former_cam = cam
-                            last_track_img_num = image_id
-                            first_track_img_num = image_id
-                            timestamp = datetime.datetime.fromtimestamp(subpartstarttime) + datetime.timedelta(milliseconds=((image_id / framerate) * 1000))
-                            former_timestamp = timestamp
-                            lineStringMString = []
-                            lineStringMString.append("SRID=5555;LINESTRINGM(%s %s %s" % (
-                                str(x_utm),
-                                str(y_utm),
-                                int((subpartstarttime + (image_id / framerate)) * 1000)))
-                            
-                        elif track_id != former_track_id:
-                                                  
-                                                   
-                            lineStringMString.append(")")
-                
-                            starttime = datetime.datetime.fromtimestamp(subpartstarttime) + datetime.timedelta(milliseconds=((first_track_img_num / framerate) * 1000))                    
-                            endtime = datetime.datetime.fromtimestamp(subpartstarttime) + datetime.timedelta(milliseconds=((last_track_img_num / framerate) * 1000))                    
-                        
-                            track_time_range = "[" + starttime.strftime('%Y-%m-%d %H:%M:%S.%f') + ", " + endtime.strftime('%Y-%m-%d %H:%M:%S.%f') + "]"
-                            
-                            insert_track(self, (slicee, day, former_cam, part, subpart, starttime.strftime('%Y-%m-%d %H:%M:%S.%f'), endtime.strftime('%Y-%m-%d %H:%M:%S.%f'), track_time_range, framerate, former_track_class, former_track_id, ''.join(lineStringMString)))
-                            
-                            lineStringMString = []
-                            lineStringMString.append("SRID=5555;LINESTRINGM(%s %s %s" % (
-                                str(x_utm),
-                                str(y_utm),
-                                int((subpartstarttime + (image_id / framerate)) * 1000)))
-                
-                            timestamp = datetime.datetime.fromtimestamp(subpartstarttime) + datetime.timedelta(milliseconds=((image_id / framerate) * 1000))
-                            former_timestamp = timestamp
-                            former_track_id = track_id
-                            first_track_img_num = image_id
-                            last_track_img_num = image_id
-                            former_track_class = track_class
-                            former_cam = cam
-                        
-                        else:
-                            timestamp = datetime.datetime.fromtimestamp(subpartstarttime) + datetime.timedelta(milliseconds=((image_id / framerate) * 1000))                    
-                        
-                            if former_timestamp + datetime.timedelta(seconds=1) <= timestamp:
-                        
-                                last_track_img_num = image_id
-                                lineStringMString.append(",%s %s %s" % (
-                                    str(x_utm),
-                                    str(y_utm),
-                                    int((subpartstarttime + (image_id / framerate)) * 1000)))    
-                                
-                                former_timestamp = timestamp                     
+#                    if(track_class == 1 or track_class == 2 or track_class == 3 or track_class == 4 or track_class == 6 or track_class == 8):
+#                    
+#                        if former_track_id is None:
+#                            
+#                            former_track_id = track_id
+#                            former_track_class = track_class
+#                            former_cam = cam
+#                            last_track_img_num = image_id
+#                            first_track_img_num = image_id
+#                            timestamp = datetime.datetime.fromtimestamp(subpartstarttime) + datetime.timedelta(seconds=((image_id / framerate)))
+#                            former_timestamp = timestamp.timestamp() 
+#                            lineStringMString = []
+#                            lineStringMString.append("SRID=5555;LINESTRINGM(%s %s %s" % (
+#                                str(x_utm),
+#                                str(y_utm),
+#                                int((subpartstarttime + (image_id / framerate)) )))
+#                            
+#                        elif track_id != former_track_id:
+#                                                  
+#                                                   
+#                            lineStringMString.append(")")
+#                
+#                            starttime = datetime.datetime.fromtimestamp(subpartstarttime) + datetime.timedelta(milliseconds=((first_track_img_num / framerate) * 1000))                    
+#                            endtime = datetime.datetime.fromtimestamp(subpartstarttime) + datetime.timedelta(milliseconds=((last_track_img_num / framerate) * 1000))                    
+#                        
+#                            track_time_range = "[" + starttime.strftime('%Y-%m-%d %H:%M:%S') + ", " + endtime.strftime('%Y-%m-%d %H:%M:%S') + "]"
+#                            
+#                            insert_track(self, (slicee, day, former_cam, part, subpart, starttime.strftime('%Y-%m-%d %H:%M:%S'), endtime.strftime('%Y-%m-%d %H:%M:%S'), track_time_range, framerate, former_track_class, former_track_id, ''.join(lineStringMString)))
+#                            
+#                            lineStringMString = []
+#                            lineStringMString.append("SRID=5555;LINESTRINGM(%s %s %s" % (
+#                                str(x_utm),
+#                                str(y_utm),
+#                                int((subpartstarttime + (image_id / framerate)) )))
+#                
+#                            timestamp = datetime.datetime.fromtimestamp(subpartstarttime) + datetime.timedelta(seconds=((image_id / framerate) ))
+#                            former_timestamp = timestamp.timestamp() 
+#                            former_track_id = track_id
+#                            first_track_img_num = image_id
+#                            last_track_img_num = image_id
+#                            former_track_class = track_class
+#                            former_cam = cam
+#                        
+#                        else:
+#                            timestamp = datetime.datetime.fromtimestamp(subpartstarttime) + datetime.timedelta(seconds=((image_id / framerate)))                    
+#                                                    
+#                            last_track_img_num = image_id
+#                            lineStringMString.append(",%s %s %s" % (
+#                                str(x_utm),
+#                                str(y_utm),
+#                                int((subpartstarttime + (image_id / framerate)))))    
+#                    
        
     def __del__(self):
         
