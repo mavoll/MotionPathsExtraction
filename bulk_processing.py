@@ -26,16 +26,21 @@ class BulkProcessor(object):
         if len(self.gpu_ids) < 1 or len(self.gpu_ids) > num_nvidia_gpus:
         	sys.exit('Number of processors to use must be greater than 0 and smaller than gpus available')
         
-        if len(self.gpu_ids) != len(self.configs) != len(self.inputs) != len(self.outputs):
+        if len(self.gpu_ids) != len(self.configs):
         	sys.exit('len(self.gpu_ids) != len(self.configs) != len(self.inputs) != len(self.outputs)')
         
-    def process(self, i):
+    def process(self, i, j, count):
         
-        print("Starting process on GPU %d" % int(self.gpu_ids[i][1]))    
+        print("Starting process %d on GPU %d" % (j, int(self.gpu_ids[i][1]))) 
         
         try:
-            
-            process = detect_and_track.App(True, int(self.gpu_ids[i][1]), str(self.configs[i][1]), str(self.inputs[i][1]), str(self.file_types[i][1]))
+            process = detect_and_track.App(True,
+                                           True,
+                                           int(self.gpu_ids[i][1]),
+                                           j, 
+                                           str(self.configs[i][1]), 
+                                           str(self.inputs[count][1]), 
+                                           str(self.file_types[i][1]))
             process.start_bulk_process()
 
             print("Process on GPU %d stopped" % int(self.gpu_ids[i][1]))
@@ -54,16 +59,15 @@ if __name__ == '__main__':
         pass
     
     procs = []
-    bulk = BulkProcessor()    
-    num_gpus = len(bulk.gpu_ids)
-       
-        
-    print("using %d processors and gpus..." % num_gpus)    
-    
-    for i in range(num_gpus):        
-        p = multiprocessing.Process(target=bulk.process, args=[i, ])
-        procs.append(p)
-        p.start()
+    bulk = BulkProcessor()           
+           
+    count = 0
+    for i in range(len(bulk.gpu_ids)):  
+        for j in range(int(bulk.num_instances[i][1])):
+            p = multiprocessing.Process(target=bulk.process, args=(i, j, count))
+            procs.append(p)
+            p.start()
+            count += 1
             
     for proc in procs:
         proc.join()

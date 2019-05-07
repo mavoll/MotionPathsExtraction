@@ -9,6 +9,7 @@ import os
 import queue
 from threading import Thread
 import time
+import glob
 
 from tkinter import Toplevel
 from tkinter.filedialog import askopenfilename
@@ -60,27 +61,26 @@ class LoggingQueueHandler(logging.Handler):
 
 class App(object):
     
-    def __init__(self, bulk_processing=False, gpu_id=None, config_file=None, input_folder=None, output_folder=None):
+    def __init__(self, bulk_processing=False, show_logging=True, gpu_id=None, instance_id=None, config_file=None, input_folder=None, file_types=None):
         
         self.root = Tk()
-        self.bulk_processing = bulk_processing
+        self.bulk_processing = bulk_processing        
+        self.show_logging = show_logging
         self.cam = None
         self.cam_id = 0
         self.input_source = None
         self.source_changed = False
         self.opencv_thread = None
+        self.input_folder = input_folder
+        self.file_types = file_types
         
         if self.bulk_processing:  
             
             workspace.GlobalInit(['caffe2', '--caffe2_log_level=0'])
             self.load_config_file(config_file)            
             self.app_gpu = gpu_id
-            self.input_source = input_folder
-            self.app_save_det_result_path = output_folder
-            self.app_save_tracking_result_path = output_folder
-            self.app_display = False
-            self.app_display_det_result_img = False
-            self.app_display_tracking_result_img = False
+            self.app_save_det_result_path = input_folder
+            self.app_save_tracking_result_path = input_folder
             self.setup_logging(__name__)                       
             self.logger = logging.getLogger(__name__)
             
@@ -138,8 +138,14 @@ class App(object):
             self.start_video()
             
     def start_bulk_process(self):
-            self.start_video()
-            self.root.mainloop()
+            
+            for filename in glob.iglob(self.input_folder + '/**/*.' + self.file_types, recursive=True):
+                print(filename)
+                #self.input_source = filename
+                #self.source_changed = True
+                #self.start_video()
+                
+            #self.root.mainloop()
             
     def start_video(self):
         if self.opencv_thread is None:            
@@ -148,10 +154,13 @@ class App(object):
             self.opencv_thread.daemon = True
             self.opencv_thread.start()
         
-        self.show_logging_window()
+        if self.show_logging is True:
+            self.show_logging_window()
 
     def run_opencv_thread(self):
-        cv2.namedWindow('source')
+        
+        if self.app_display is True:
+            cv2.namedWindow('source')
         
         self.start_processing()
 
@@ -372,8 +381,10 @@ class App(object):
 
     def save_det_result_img(self, vis, frame_id):
         
-        try:                        
-            cv2.imwrite(self.app_save_det_result_path + '/det_res_img_' + str(frame_id) + '.png',vis)
+        try:   
+            head, tail = os.path.split(self.input_source)   
+            filename = os.path.splitext(tail)[0]                  
+            cv2.imwrite(head + '/' + filename + '_' + str(frame_id) + '.png',vis)
             
         except Exception:
 
@@ -400,7 +411,10 @@ class App(object):
                                 
             target_lines.sort(key=lambda x: x[0])
             
-            with open(self.app_save_det_result_path + '/detections' + '.csv', 'w') as txtfile:
+            head, tail = os.path.split(self.input_source)   
+            filename = os.path.splitext(tail)[0]                  
+            
+            with open(head + '/' + filename + '_detections.csv', 'w+') as txtfile:
                 wr = csv.writer(txtfile, lineterminator='\n')
                 for val in target_lines:
                     wr.writerow(val)
@@ -481,6 +495,10 @@ class App(object):
                         '/tracking_res_img_' + str(frame_id) + 
                         '.png',vis)
             
+            head, tail = os.path.split(self.input_source)   
+            filename = os.path.splitext(tail)[0]                  
+            cv2.imwrite(head + '/' + filename + '_tracking_' + str(frame_id) + '.png',vis)
+            
         except Exception:
 
             e = sys.exc_info()[0]
@@ -493,7 +511,11 @@ class App(object):
             dataset = self.dataset.classes
             tracking_boxes.sort(key = lambda x: (x[0], x[5]))
             
-            with open(self.app_save_tracking_result_path + '/tracking' + '.csv', 'w') as txtfile:
+            head, tail = os.path.split(self.input_source)   
+            filename = os.path.splitext(tail)[0]                  
+            
+            with open(head + '/' + filename + '_tracks.csv', 'w+') as txtfile:
+                
                 wr = csv.writer(txtfile, lineterminator='\n')
                 
                 for val in tracking_boxes:
