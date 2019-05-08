@@ -359,8 +359,6 @@ Bulk processing (fasterrcnn and deep_sort) 4 instances (2 processes per GPU) run
   <img src="/images/bulk_processing.png" width="800" align="middle">
 </p>
 
-Evaluate the best combination of number instances (parallel processes) per GPU in terms of GPU Memory, RAM, and CPU usage (with 2 GeForce GTX 1080 Ti 11 GB, 32 GB RAM and 8 i7 cores; 2 instances per GPU is good and delivers an parallelization factor of 4).
-
 Parameters influencing the runtime most:
 
 `detectron_score_thresh = 0.6` higher is faster but also results in less trajectories. Determines the min. value of the score/confidence of an detection to consider them for tracking.  
@@ -368,6 +366,8 @@ Parameters influencing the runtime most:
 `deep_sort_min_confidence = 128` same as for detectron_score_thresh but for tracks.
 
 How to start:
+
+Evaluate the best combination of number instances (parallel processes) per GPU in terms of GPU Memory, RAM, and CPU usage (with 2 GeForce GTX 1080 Ti 11 GB, 32 GB RAM and 8 i7 cores; 2 instances per GPU is good and delivers an parallelization factor of 4).
 
 Create/Modify `config_gpu_x.ini` files for each GPU.
 
