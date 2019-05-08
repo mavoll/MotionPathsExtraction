@@ -139,6 +139,7 @@ class App(object):
             
     def start_bulk(self):        
         self.start_bulk_process()
+        self.root.mainloop()
             
     def start_bulk_process(self):
            
@@ -147,8 +148,6 @@ class App(object):
             self.input_source = filename
             self.source_changed = True
             self.start_video()
-        
-        self.root.mainloop()
             
     def start_video(self):
         if self.opencv_thread is None:            
