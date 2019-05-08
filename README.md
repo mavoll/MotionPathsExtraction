@@ -370,7 +370,9 @@ Parameters influencing the runtime most:
 How to start:
 
 Create/Modify `config_gpu_x.ini` files for each GPU.
+
 Modify `bulk_config.ini` and determine the input folders (each instance will recursively walk through its corresponding folder and process every file matching the file type) for each instance.
+
 `python bulk_processing.py`
 
 ## Further Usage based on the tracking results: ##
