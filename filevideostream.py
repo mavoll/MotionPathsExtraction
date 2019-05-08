@@ -54,8 +54,8 @@ class FileVideoStream:
                 if not grabbed:
                     if frame_counter > num_frames:
                         self.stopped = True
-                    else:
-                        continue
+                    
+                    continue
                     
                 # if there are transforms to be done, might as well
                 # do them on producer thread before handing back to
