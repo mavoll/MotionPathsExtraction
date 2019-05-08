@@ -54,6 +54,7 @@ class FileVideoStream:
                 if not grabbed:
                     if frame_counter > num_frames:
                         self.stopped = True
+                    frame_counter -= 1
                     
                     continue
                     
