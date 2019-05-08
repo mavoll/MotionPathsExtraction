@@ -41,7 +41,7 @@ class BulkProcessor(object):
                                            str(self.configs[i][1]), 
                                            str(self.inputs[count][1]), 
                                            str(self.file_types[i][1]))
-            process.start_bulk_process()
+            process.start_bulk()
 
             print("Process on GPU %d stopped" % int(self.gpu_ids[i][1]))
         
