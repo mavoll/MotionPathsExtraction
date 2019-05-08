@@ -137,9 +137,9 @@ class App(object):
             self.source_changed = True
             self.start_video()
             
-    def start_bulk(self):
+    def start_bulk(self):        
+        self.start_bulk_process()
         self.root.mainloop()
-        self.start_bulk_process()                
             
     def start_bulk_process(self):
            
