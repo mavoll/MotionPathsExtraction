@@ -138,14 +138,13 @@ class App(object):
             self.start_video()
             
     def start_bulk_process(self):
-            
+            #ffmpeg -i GP067902.MP4 -vcodec copy -an GP067902_nosound.MP4
             for filename in glob.iglob(self.input_folder + '/**/*.' + self.file_types, recursive=True):
-                print(filename)
-                #self.input_source = filename
-                #self.source_changed = True
-                #self.start_video()
+                self.input_source = filename
+                self.source_changed = True
+                self.start_video()
                 
-            #self.root.mainloop()
+            self.root.mainloop()
             
     def start_video(self):
         if self.opencv_thread is None:            
