@@ -139,7 +139,7 @@ class App(object):
             
     def start_bulk(self):
             self.start_bulk_process()    
-            self.root.mainloop()
+            #self.root.mainloop()
             
     def start_bulk_process(self):
             #ffmpeg -i GP067902.MP4 -vcodec copy -an GP067902_nosound.MP4
