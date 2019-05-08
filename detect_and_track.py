@@ -1,7 +1,7 @@
 import configparser
 import cv2
 from imutils.video import FPS
-from imutils.video import FileVideoStream
+from filevideostream import FileVideoStream
 import numpy as np
 import sys
 import csv
@@ -149,10 +149,11 @@ class App(object):
     def start_bulk_video(self):
            
         #ffmpeg -i GP067902.MP4 -vcodec copy -an GP067902_nosound.MP4
-        
-        self.input_source = self.glob.pop(0)
-        #self.source_changed = True
-        self.start_video()
+                
+        if len(self.glob) > 0:
+            #self.source_changed = True
+            self.input_source = self.glob.pop(0)
+            self.start_video()
             
     def start_video(self):
         if self.opencv_thread is None:            
