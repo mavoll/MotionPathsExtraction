@@ -353,7 +353,7 @@ If you have use-cases in mind requiring streaming images from multiple computers
 
 Only on dataset level, because tracker and detector models fit into one GPU at the same time so using multiple processes (Pythons multiprocessing) and instances, two per GPU, to batch process bigger input data should be ok.
 
-Bulk processing 4 instances (2 processes per GPU) running recursively on different forders and subfolders:
+Bulk processing (fasterrcnn and deep_sort) 4 instances (2 processes per GPU) running recursively on different forders and subfolders:
 
 <p align="center">
   <img src="/images/bulk_processing.png" width="800" align="middle">
