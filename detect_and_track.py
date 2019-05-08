@@ -74,6 +74,7 @@ class App(object):
         self.input_folder = input_folder
         self.file_types = file_types
         self.window = None
+        self.tracker = None
         
         if self.bulk_processing:  
             
@@ -150,7 +151,7 @@ class App(object):
         #ffmpeg -i GP067902.MP4 -vcodec copy -an GP067902_nosound.MP4
         
         self.input_source = self.glob.pop(0)
-        self.source_changed = True
+        #self.source_changed = True
         self.start_video()
             
     def start_video(self):
@@ -516,8 +517,7 @@ class App(object):
     def save_tracking_result_boxes(self, tracking_boxes):                        
         
         try:
-            dataset = self.dataset.classes
-            tracking_boxes.sort(key = lambda x: (x[0], x[5]))
+            tracking_boxes.sort(key = lambda x: (x[0], x[1]))
             
             head, tail = os.path.split(self.input_source)   
             filename = os.path.splitext(tail)[0]                  
@@ -529,8 +529,8 @@ class App(object):
                 for val in tracking_boxes:
                     
                     if self.app_tracker_to_use == 'deep_sort':            
-                        val = [val[0] + 1, val[1], round(val[2], 1), round(val[3], 1), 
-                               round(val[4], 1), round(val[5], 1), dataset[round(val[6], 1)]]
+                        val = [val[0] + 1, val[1], round(val[2], 2), round(val[3], 2), 
+                               round(val[4], 2), round(val[5], 2), round(val[6], 1), -1, -1, -1]
                         
                     if self.app_tracker_to_use == 'sort':
                         val = [val[0] + 1, int(val[5]), round(val[1], 1), 
