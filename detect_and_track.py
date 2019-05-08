@@ -147,7 +147,8 @@ class App(object):
             self.input_source = filename
             self.source_changed = True
             self.start_video()
-            self.root.mainloop()
+        
+        self.root.mainloop()
             
     def start_video(self):
         if self.opencv_thread is None:            
