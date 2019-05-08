@@ -1,8 +1,7 @@
 import configparser
-import os, sys
+import sys
 import subprocess
 import multiprocessing
-from tkinter import messagebox
 
 import detect_and_track
 
@@ -42,7 +41,6 @@ class BulkProcessor(object):
                                            str(self.inputs[count][1]), 
                                            str(self.file_types[i][1]))
             process.start_bulk()
-
             print("Process on GPU %d stopped" % int(self.gpu_ids[i][1]))
         
         except Exception:

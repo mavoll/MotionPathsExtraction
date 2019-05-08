@@ -73,17 +73,18 @@ class App(object):
         self.opencv_thread = None
         self.input_folder = input_folder
         self.file_types = file_types
+        self.window = None
         
         if self.bulk_processing:  
             
             workspace.GlobalInit(['caffe2', '--caffe2_log_level=0'])
+            self.glob = glob.glob(self.input_folder + '/**/*.' + self.file_types, recursive=True)
             self.load_config_file(config_file)            
             self.app_gpu = gpu_id
             self.app_save_det_result_path = input_folder
             self.app_save_tracking_result_path = input_folder
             self.setup_logging(__name__)                       
-            self.logger = logging.getLogger(__name__)
-            
+            self.logger = logging.getLogger(__name__)            
         
         else:   
             self.v_1: IntVar = IntVar()        
@@ -137,17 +138,20 @@ class App(object):
             self.source_changed = True
             self.start_video()
             
-    def start_bulk(self):        
-        self.start_bulk_process()
+    
+    def start_bulk(self):
+           
+        self.start_bulk_video()
         self.root.mainloop()
-            
-    def start_bulk_process(self):
+        
+        
+    def start_bulk_video(self):
            
         #ffmpeg -i GP067902.MP4 -vcodec copy -an GP067902_nosound.MP4
-        for filename in glob.iglob(self.input_folder + '/**/*.' + self.file_types, recursive=True):
-            self.input_source = filename
-            self.source_changed = True
-            self.start_video()
+        
+        self.input_source = self.glob.pop(0)
+        self.source_changed = True
+        self.start_video()
             
     def start_video(self):
         if self.opencv_thread is None:            
@@ -292,6 +296,8 @@ class App(object):
             
             if not self.bulk_processing:
                 self.start_processing()
+            else:
+                self.start_bulk_video()
 
     def initializeDetector(self):
                 
@@ -853,10 +859,11 @@ class App(object):
     
     def show_logging_window(self):
         
-        if self.bulk_processing:
-            self.window = self.root
-        else:
-            self.window = Toplevel(self.root)
+        if self.window is None:
+            if self.bulk_processing:            
+                self.window = self.root
+            else:
+                self.window = Toplevel(self.root)
         
         self.window.wm_title("Process/GPU: " + str(self.app_gpu))
         self.window.resizable(width=True, height=True)
