@@ -296,10 +296,10 @@ class App(object):
             file_stream.stop()
             self.source_changed = False
             
-            if not self.bulk_processing:
-                self.start_processing()
-            else:
-                self.start_bulk_video()
+            if self.bulk_processing:
+                self.input_source = self.glob.pop(0)
+                
+            self.start_processing()
 
     def initializeDetector(self):
                 
