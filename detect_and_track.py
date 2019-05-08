@@ -151,7 +151,7 @@ class App(object):
         #ffmpeg -i GP067902.MP4 -vcodec copy -an GP067902_nosound.MP4
                 
         if len(self.glob) > 0:
-            #self.source_changed = True
+            self.source_changed = True
             self.input_source = self.glob.pop(0)
             self.start_video()
             
