@@ -89,7 +89,7 @@ class App(object):
         lineStringMString = None
         
         tracks_df = pd.read_csv(self.args['track_file_path'])       
-        tracks_df.sort_values(['objid', 'frame'], ascending=True, inplace=True)
+        tracks_df = tracks_df.sort_values(['objid', 'frame'], ascending=True)
         tracks_df = tracks_df.groupby('objid')
         
         for track, group in tracks_df:
@@ -98,6 +98,7 @@ class App(object):
             lineStringMString.append("SRID=5555;LINESTRINGM(")
             starttime = None
             endtime = 0
+            counter = 0
                         
             for index, row in group.iterrows():   
                 
@@ -112,6 +113,7 @@ class App(object):
                 
                 if endtime < time:                    
                 
+                    counter += 1
                     if starttime is not None:
                         lineStringMString.append(",")
                     
@@ -127,12 +129,13 @@ class App(object):
                 
             lineStringMString.append(")")            
             
-            track_time_range = "[" + time2.strftime('%Y-%m-%d %H:%M:%S', time2.localtime(int(starttime))) + ", " + time2.strftime('%Y-%m-%d %H:%M:%S', time2.localtime(int(endtime))) + "]"
-            
-            insert_track(self, (slicee, day, cam, part, subpart, 
-                                time2.strftime('%Y-%m-%d %H:%M:%S', time2.localtime(int(starttime))), 
-                                time2.strftime('%Y-%m-%d %H:%M:%S', time2.localtime(int(endtime))), 
-                                track_time_range, framerate, track_class, track_id, ''.join(lineStringMString)))
+            if counter > 1:
+                track_time_range = "[" + time2.strftime('%Y-%m-%d %H:%M:%S', time2.localtime(int(starttime))) + ", " + time2.strftime('%Y-%m-%d %H:%M:%S', time2.localtime(int(endtime))) + "]"
+                
+                insert_track(self, (slicee, day, cam, part, subpart, 
+                                    time2.strftime('%Y-%m-%d %H:%M:%S', time2.localtime(int(starttime))), 
+                                    time2.strftime('%Y-%m-%d %H:%M:%S', time2.localtime(int(endtime))), 
+                                    track_time_range, framerate, track_class, track_id, ''.join(lineStringMString)))
                         
        
     def __del__(self):
