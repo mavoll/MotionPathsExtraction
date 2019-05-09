@@ -224,7 +224,7 @@ class App(object):
                                                                                                 
                                 all_boxes[frame_id] = cls_boxes
                                 
-                                self.logger.info('Inference time: {:.3f}s'.format(time.time() - t))
+                                self.logger.info('Inference time: {:.3f}s'.format(time.time() - t))          
                                 
                                 for k, v in timers.items():
                                     self.logger.info(' | {}: {:.3f}s'.format(k, v.average_time))
@@ -271,6 +271,8 @@ class App(object):
                                         self.save_tracking_result_img(vis, frame_id)
                                 
                                 tracking_boxes = self.extend_result_boxes(frame_id, tracking_boxes, tmp_tracking_boxes)
+                                
+                                self.logger.info('Tracks in total: {} tracks'.format(len(tracking_boxes)))
                                 
                             if self.app_display:
                                 cv2.imshow('source', vis)  
@@ -548,10 +550,13 @@ class App(object):
     
     def extend_result_boxes(self, frame_id, tracking_boxes, tmp_tracking_boxes):
         
-        if self.app_tracker_to_use == 'deep_sort':
-            tracking_boxes.extend(self.tracker.get_confirmed_tracks(frame_id))
+        if self.app_tracker_to_use == 'deep_sort':            
+            conf_tracks = self.tracker.get_confirmed_tracks(frame_id)
+            tracking_boxes.extend(conf_tracks)
+            self.logger.info('Tracks in image: {} tracks'.format(len(conf_tracks)))
             
         elif self.app_tracker_to_use == 'sort':                                    
+            self.logger.info('Tracks in image: {} tracks'.format(len(tmp_tracking_boxes)))
             for index, obj in enumerate(tmp_tracking_boxes):
                 tracking_boxes.extend([[frame_id, obj[0], obj[1], obj[2], obj[3], obj[4]]])
                 
