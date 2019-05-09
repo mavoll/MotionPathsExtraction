@@ -864,11 +864,13 @@ class App(object):
     
     def show_logging_window(self):
         
-        if self.window is None:
-            if self.bulk_processing:            
-                self.window = self.root
-            else:
-                self.window = Toplevel(self.root)
+        if self.window is not None:
+            self.window.destroy()
+        
+        if self.bulk_processing:            
+            self.window = self.root
+        else:
+            self.window = Toplevel(self.root)
         
         self.window.wm_title("Process/GPU: " + str(self.app_gpu))
         self.window.resizable(width=True, height=True)
