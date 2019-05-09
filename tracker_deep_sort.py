@@ -26,16 +26,18 @@ class DeepSortTracker:
         tracking_boxes = []
         result_boxes = []
         
-        deep_sort_boxes = self.generate_deep_sort_detections(vis, cls_boxes, self.encoder)
-        
-        for row in deep_sort_boxes:
+        if len(cls_boxes) > 0:
             
-            bbox, confidence, class_id, feature = row[0:4], row[4], row[5], row[6:]
-            bbox[2] = bbox[2] - bbox[0]
-            bbox[3] = bbox[3] - bbox[1]           
-            if bbox[3] < deep_sort_min_detection_height:
-                continue
-            tracking_boxes.append(DeepSortDetection(bbox, confidence, int(class_id), feature))
+            deep_sort_boxes = self.generate_deep_sort_detections(vis, cls_boxes, self.encoder)
+        
+            for row in deep_sort_boxes:
+                
+                bbox, confidence, class_id, feature = row[0:4], row[4], row[5], row[6:]
+                bbox[2] = bbox[2] - bbox[0]
+                bbox[3] = bbox[3] - bbox[1]           
+                if bbox[3] < deep_sort_min_detection_height:
+                    continue
+                tracking_boxes.append(DeepSortDetection(bbox, confidence, int(class_id), feature))
                
         
         tracking_boxes = [d for d in tracking_boxes if d.confidence >= deep_sort_min_confidence]
@@ -59,7 +61,7 @@ class DeepSortTracker:
         return result_boxes
         
     def generate_deep_sort_detections(self, vis, cls_boxes, encoder=None):
-        
+                
         features = encoder(vis, cls_boxes[:, 0:4].copy())
         deep_sort_boxes = [np.r_[(cls_boxes, feature)] for cls_boxes, feature
                            in zip(cls_boxes, features)]

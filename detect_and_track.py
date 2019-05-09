@@ -271,9 +271,7 @@ class App(object):
                                         self.save_tracking_result_img(vis, frame_id)
                                 
                                 tracking_boxes = self.extend_result_boxes(frame_id, tracking_boxes, tmp_tracking_boxes)
-                                
-                                self.logger.info('Tracks in total: {} tracks'.format(len(tracking_boxes)))
-                                
+                                                                
                             if self.app_display:
                                 cv2.imshow('source', vis)  
                                 ch = 0xFF & cv2.waitKey(1)
