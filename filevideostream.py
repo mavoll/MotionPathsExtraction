@@ -36,6 +36,8 @@ class FileVideoStream:
     def update(self):
         frame_counter = 0
         num_frames = self.stream.get(cv2.CAP_PROP_FRAME_COUNT)
+        
+        
         # keep looping infinitely
         while True:
             # if the thread indicator variable is set, stop the
@@ -103,4 +105,4 @@ class FileVideoStream:
         # indicate that the thread should be stopped
         self.stopped = True
         # wait until stream resources are released (producer thread might be still grabbing frame)
-        self.thread.join()
+        #self.thread.join()
