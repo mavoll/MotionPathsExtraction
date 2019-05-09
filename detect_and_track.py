@@ -212,6 +212,7 @@ class App(object):
                             fps.update()
                             fps.stop()
                             
+                            self.logger.info('Processing file {}'.format(self.input_source))
                             self.logger.info('Processing frame {}'.format(frame_id))
                             
                             fps_text = "FPS " + "{:.2f}".format(fps.fps())
