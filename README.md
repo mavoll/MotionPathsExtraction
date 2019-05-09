@@ -480,7 +480,7 @@ Add Layer tracks_points_per_sec from category PostGIS -> tracks -> postgis
 In tracks_points_per_sec Layer Properties in category 'Symbology' choose 'Categorized' select 'track_class' as column and classify. From the result list deselect all except 1 for person and 3 for car (to see only persons and cars and to give them different colors for the animation).
 
 Open TimeManager settings and add layer (layer: tracks_points_per_sec, start time: time, offset: 1, accumulate features: whateveryoulike). You can also use the tracks_linestrings_per_sec.
-Select for 'show frame for' 25 millisecs and as 'time frame size' 1 sec.
+Select for 'show frame for' 1000 millisecs (FPS 25) and as 'time frame size' 1 sec.
 
 Turn on TimeManager and play. 
 
