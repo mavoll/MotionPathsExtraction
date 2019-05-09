@@ -1,5 +1,6 @@
 import argparse
 import datetime
+import time as time2
 import psycopg2
 import pandas as pd
     
@@ -87,8 +88,7 @@ class App(object):
                 
         lineStringMString = None
         
-        tracks_df = pd.read_csv(self.args['track_file_path'])        
-        print(tracks_df.head(5))
+        tracks_df = pd.read_csv(self.args['track_file_path'])       
         tracks_df.sort_values(['objid', 'frame'], ascending=True, inplace=True)
         tracks_df = tracks_df.groupby('objid')
         
@@ -97,7 +97,7 @@ class App(object):
             lineStringMString = []
             lineStringMString.append("SRID=5555;LINESTRINGM(")
             starttime = None
-            endtime = None
+            endtime = 0
                         
             for index, row in group.iterrows():   
                 
@@ -105,27 +105,34 @@ class App(object):
                 track_id = float(row[1])
                 cam = row[11]
                 track_class = int(float(row[7]))
-                x_utm = row[13]                    
-                y_utm = row[14] 
+                x_utm = row[13] 
+                y_utm = row[14]
                 
-                if starttime is not None:
-                    lineStringMString.append(",")
+                time = int(subpartstarttime  + (image_id / framerate))
                 
-                lineStringMString.append("%s %s %s" % (
-                            str(x_utm),
-                            str(y_utm),
-                            int((subpartstarttime + (image_id / framerate))))) 
+                if endtime < time:                    
                 
-                if starttime is None:
-                    starttime = datetime.datetime.fromtimestamp(subpartstarttime) + datetime.timedelta(milliseconds=((image_id / framerate) * 1000))
-                
-                endtime = datetime.datetime.fromtimestamp(subpartstarttime) + datetime.timedelta(milliseconds=((image_id / framerate) * 1000))
+                    if starttime is not None:
+                        lineStringMString.append(",")
+                    
+                    lineStringMString.append("%s %s %s" % (
+                                str(x_utm),
+                                str(y_utm),
+                                time))
+                    
+                    if starttime is None:
+                        starttime = time
+                    
+                    endtime = time
                 
             lineStringMString.append(")")            
             
-            track_time_range = "[" + starttime.strftime('%Y-%m-%d %H:%M:%S') + ", " + endtime.strftime('%Y-%m-%d %H:%M:%S') + "]"
+            track_time_range = "[" + time2.strftime('%Y-%m-%d %H:%M:%S', time2.localtime(int(starttime))) + ", " + time2.strftime('%Y-%m-%d %H:%M:%S', time2.localtime(int(endtime))) + "]"
             
-            insert_track(self, (slicee, day, cam, part, subpart, starttime.strftime('%Y-%m-%d %H:%M:%S'), endtime.strftime('%Y-%m-%d %H:%M:%S'), track_time_range, framerate, track_class, track_id, ''.join(lineStringMString)))
+            insert_track(self, (slicee, day, cam, part, subpart, 
+                                time2.strftime('%Y-%m-%d %H:%M:%S', time2.localtime(int(starttime))), 
+                                time2.strftime('%Y-%m-%d %H:%M:%S', time2.localtime(int(endtime))), 
+                                track_time_range, framerate, track_class, track_id, ''.join(lineStringMString)))
                         
        
     def __del__(self):
