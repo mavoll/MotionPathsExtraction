@@ -304,8 +304,8 @@ class App(object):
             
             if self.bulk_processing:
                 self.start_bulk_video()
-            else:
-                self.start_processing()
+            
+            self.start_processing()
 
     def initializeDetector(self):
                 
