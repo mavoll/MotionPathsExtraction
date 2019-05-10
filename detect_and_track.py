@@ -302,8 +302,9 @@ class App(object):
             file_stream.stop()
             self.source_changed = False
             
-            if self.bulk_processing:
-                self.start_bulk_video()
+            if self.bulk_processing:                
+                self.input_source = self.glob.pop(0)
+                self.start_video()
             
             self.start_processing()
 
