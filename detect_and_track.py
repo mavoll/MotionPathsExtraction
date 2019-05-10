@@ -147,8 +147,6 @@ class App(object):
         
         
     def start_bulk_video(self):
-           
-        #ffmpeg -i GP067902.MP4 -vcodec copy -an GP067902_nosound.MP4
                 
         if len(self.glob) > 0:
             
@@ -157,7 +155,6 @@ class App(object):
             file_name = os.path.splitext(self.input_source)[0] + "_tracks.csv"
             
             if os.path.isfile(file_name) is not True:
-                self.source_changed = True
                 self.start_video()
             else: 
                 self.start_bulk_video()
