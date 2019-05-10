@@ -151,8 +151,8 @@ class App(object):
         #ffmpeg -i GP067902.MP4 -vcodec copy -an GP067902_nosound.MP4
                 
         if len(self.glob) > 0:
-            self.source_changed = True
             self.input_source = self.glob.pop(0)
+            self.source_changed = True
             self.start_video()
             
     def start_video(self):
@@ -160,8 +160,8 @@ class App(object):
             self.source_changed = False
             self.opencv_thread = Thread(target=self.run_opencv_thread)
             self.opencv_thread.daemon = True
-            self.opencv_thread.start()
-        
+            self.opencv_thread.start()  
+            
         if self.show_logging is True:
             self.show_logging_window()
 
@@ -176,6 +176,7 @@ class App(object):
         self.opencv_thread = None
 
     def start_processing(self):
+        
         if self.input_source is not None:
 
             file_stream = FileVideoStream(self.input_source, queue_size=self.app_imutils_queue_size).start()
@@ -298,9 +299,9 @@ class App(object):
             self.source_changed = False
             
             if self.bulk_processing:
-                self.input_source = self.glob.pop(0)
-                
-            self.start_processing()
+                self.start_bulk_video()
+            else:
+                self.start_processing()
 
     def initializeDetector(self):
                 

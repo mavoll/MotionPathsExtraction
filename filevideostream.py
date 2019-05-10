@@ -105,4 +105,4 @@ class FileVideoStream:
         # indicate that the thread should be stopped
         self.stopped = True
         # wait until stream resources are released (producer thread might be still grabbing frame)
-        #self.thread.join()
+        self.thread.join()

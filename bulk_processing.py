@@ -2,6 +2,7 @@ import configparser
 import sys
 import subprocess
 import multiprocessing
+import time
 
 import detect_and_track
 
@@ -66,6 +67,7 @@ if __name__ == '__main__':
             procs.append(p)
             p.start()
             count += 1
+            time.sleep(3)
             
     for proc in procs:
         proc.join()
