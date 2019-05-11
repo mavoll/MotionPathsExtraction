@@ -74,9 +74,10 @@ if __name__ == '__main__':
                     procs = []
                     
                     for t in range(0, len(glob_list)):
-                        file_name = os.path.splitext(glob_list.pop(0))[0] + "_tracks.csv"            
+                        vid_file_name = glob_list.pop(0)
+                        file_name = os.path.splitext(vid_file_name)[0] + "_tracks.csv"            
                         if os.path.isfile(file_name) is not True:
-                            p = multiprocessing.Process(target=bulk.process, args=(i, j, count, glob_list.pop(0)))
+                            p = multiprocessing.Process(target=bulk.process, args=(i, j, count, vid_file_name))
                             procs.append(p)
                     proc_dict[str(i) + str(j)] = procs
                 
