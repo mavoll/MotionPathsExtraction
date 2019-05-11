@@ -73,8 +73,7 @@ if __name__ == '__main__':
                 glob_list = glob.glob(bulk.inputs[count][1] + '/**/*.' + bulk.file_types[i][1], recursive=True)            
                 procs = []
                 
-                for t in range(0, len(glob_list)):
-                    vid_file_name = glob_list.pop(0)
+                for index, vid_file_name in enumerate(glob_list):
                     file_name = os.path.splitext(vid_file_name)[0] + "_tracks.csv"            
                     if os.path.isfile(file_name) is not True:
                         p = multiprocessing.Process(target=bulk.process, args=(i, j, count, vid_file_name))
