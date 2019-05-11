@@ -56,15 +56,13 @@ if __name__ == '__main__':
     try:
         multiprocessing.set_start_method('spawn')
     except RuntimeError:
-        pass
-    
+        pass    
     
     bulk = BulkProcessor()                    
            
     proc_dict = {}
     count = 0
-    while True:
-        
+    while True:        
         proc_arr = []
         
         for i in range(len(bulk.gpu_ids)):  
