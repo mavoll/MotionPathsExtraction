@@ -97,9 +97,9 @@ if __name__ == '__main__':
             if not proc.is_alive():
                 if len(proc_dict[str(i) + str(j)]) > 0:
                     proc = proc_dict[str(i) + str(j)].pop(0)
-                    del proc_arr[index]
-                    proc.start()
+                    del proc_arr[index]                    
                     time.sleep(20)
+                    proc.start()
                 
                     
         
