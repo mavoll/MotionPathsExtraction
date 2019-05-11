@@ -4,6 +4,7 @@ import subprocess
 import multiprocessing
 import time
 import glob
+import os
 
 import detect_and_track
 
@@ -71,9 +72,12 @@ if __name__ == '__main__':
                 if str(i) + str(j) not in proc_dict:
                     glob_list = glob.glob(bulk.inputs[count][1] + '/**/*.' + bulk.file_types[i][1], recursive=True)            
                     procs = []
+                    
                     for t in range(0, len(glob_list)):
-                        p = multiprocessing.Process(target=bulk.process, args=(i, j, count, glob_list.pop(0)))
-                        procs.append(p)
+                        file_name = os.path.splitext(glob_list.pop(0))[0] + "_tracks.csv"            
+                        if os.path.isfile(file_name) is not True:
+                            p = multiprocessing.Process(target=bulk.process, args=(i, j, count, file_name))
+                            procs.append(p)
                     proc_dict[str(i) + str(j)] = procs
                 
                     count += 1

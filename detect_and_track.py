@@ -83,8 +83,7 @@ class App(object):
             self.app_save_det_result_path = input_folder
             self.app_save_tracking_result_path = input_folder
             self.setup_logging(__name__)                       
-            self.logger = logging.getLogger(__name__)       
-            print(self.input_source)
+            self.logger = logging.getLogger(__name__)      
         
         else:   
             self.v_1: IntVar = IntVar()        
@@ -137,21 +136,22 @@ class App(object):
             self.input_source = filename
             self.source_changed = True
             self.start_video()
+       
+    def check_opencv_thread_running(self):
+        if self.opencv_thread is not None and self.opencv_thread.isAlive():            
+            return True
+        else:
+            return False
             
+        self.main.after(1000, self.check_opencv_thread_running)
     
     def start_bulk(self):
            
-        self.start_bulk_video()
-        self.root.mainloop()
+        self.start_video()
         
+        if self.check_opencv_thread_running() is True:
+            self.root.mainloop()
         
-    def start_bulk_video(self):
-                
-        file_name = os.path.splitext(self.input_source)[0] + "_tracks.csv"
-            
-        if os.path.isfile(file_name) is not True:
-            self.start_video()
-            
     def start_video(self):        
         
         if self.opencv_thread is None:            
