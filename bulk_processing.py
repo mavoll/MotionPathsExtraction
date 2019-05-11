@@ -67,7 +67,7 @@ if __name__ == '__main__':
             procs.append(p)
             p.start()
             count += 1
-            time.sleep(3)
+            time.sleep(20)
             
     for proc in procs:
         proc.join()
