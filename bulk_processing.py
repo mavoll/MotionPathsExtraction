@@ -63,37 +63,88 @@ if __name__ == '__main__':
            
     proc_dict = {}
     count = 0
-    while True:        
-        proc_arr = []
-        
-        for i in range(len(bulk.gpu_ids)):  
-            for j in range(int(bulk.num_instances[i][1])):            
+           
+    proc_arr = []
+    events = []
+    
+    for i in range(len(bulk.gpu_ids)):  
+        for j in range(int(bulk.num_instances[i][1])):            
+            
+            if str(i) + str(j) not in proc_dict:
+                glob_list = glob.glob(bulk.inputs[count][1] + '/**/*.' + bulk.file_types[i][1], recursive=True)            
+                procs = []
                 
-                if str(i) + str(j) not in proc_dict:
-                    glob_list = glob.glob(bulk.inputs[count][1] + '/**/*.' + bulk.file_types[i][1], recursive=True)            
-                    procs = []
-                    
-                    for t in range(0, len(glob_list)):
-                        vid_file_name = glob_list.pop(0)
-                        file_name = os.path.splitext(vid_file_name)[0] + "_tracks.csv"            
-                        if os.path.isfile(file_name) is not True:
-                            p = multiprocessing.Process(target=bulk.process, args=(i, j, count, vid_file_name))
-                            procs.append(p)
-                    proc_dict[str(i) + str(j)] = procs
+                for t in range(0, len(glob_list)):
+                    vid_file_name = glob_list.pop(0)
+                    file_name = os.path.splitext(vid_file_name)[0] + "_tracks.csv"            
+                    if os.path.isfile(file_name) is not True:
+                        p = multiprocessing.Process(target=bulk.process, args=(i, j, count, vid_file_name))
+                        procs.append(p)
+                proc_dict[str(i) + str(j)] = procs
+            
+                count += 1
                 
-                    count += 1
-                    
+            if len(proc_dict[str(i) + str(j)]) > 0:
+                proc = proc_dict[str(i) + str(j)].pop(0)
+                proc_arr.append((i, j, proc))
+                proc.start()
+                time.sleep(20)
+            else:
+                proc_dict.pop(str(i) + str(j))                
+    
+    while len(proc_arr) > 0:        
+        for index, (i, j, proc) in enumerate(proc_arr):            
+            if not proc.is_alive():
                 if len(proc_dict[str(i) + str(j)]) > 0:
                     proc = proc_dict[str(i) + str(j)].pop(0)
-                    proc_arr.append(proc)
+                    del proc_arr[index]
                     proc.start()
                     time.sleep(20)
-                else:
-                    proc_dict.pop(str(i) + str(j))                
+                
+                    
         
-        for proc in proc_arr:
-            proc.join()
-        
-        
-        if len(proc_dict) == 0:
-            break
+#if __name__ == '__main__':
+#
+#    try:
+#        multiprocessing.set_start_method('spawn')
+#    except RuntimeError:
+#        pass    
+#    
+#    bulk = BulkProcessor()                    
+#           
+#    proc_dict = {}
+#    count = 0
+#    while True:        
+#        proc_arr = []
+#        
+#        for i in range(len(bulk.gpu_ids)):  
+#            for j in range(int(bulk.num_instances[i][1])):            
+#                
+#                if str(i) + str(j) not in proc_dict:
+#                    glob_list = glob.glob(bulk.inputs[count][1] + '/**/*.' + bulk.file_types[i][1], recursive=True)            
+#                    procs = []
+#                    
+#                    for t in range(0, len(glob_list)):
+#                        vid_file_name = glob_list.pop(0)
+#                        file_name = os.path.splitext(vid_file_name)[0] + "_tracks.csv"            
+#                        if os.path.isfile(file_name) is not True:
+#                            p = multiprocessing.Process(target=bulk.process, args=(i, j, count, vid_file_name))
+#                            procs.append(p)
+#                    proc_dict[str(i) + str(j)] = procs
+#                
+#                    count += 1
+#                    
+#                if len(proc_dict[str(i) + str(j)]) > 0:
+#                    proc = proc_dict[str(i) + str(j)].pop(0)
+#                    proc_arr.append(proc)
+#                    proc.start()
+#                    time.sleep(20)
+#                else:
+#                    proc_dict.pop(str(i) + str(j))                
+#        
+#        for proc in proc_arr:
+#            proc.join()
+#        
+#        
+#        if len(proc_dict) == 0:
+#            break

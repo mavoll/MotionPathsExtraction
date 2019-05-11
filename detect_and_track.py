@@ -82,8 +82,7 @@ class App(object):
             self.app_save_det_result_path = input_folder
             self.app_save_tracking_result_path = input_folder
             self.setup_logging(__name__)                       
-            self.logger = logging.getLogger(__name__)   
-            print('XXXXXXX' + file)
+            self.logger = logging.getLogger(__name__)
         
         else:   
             self.v_1: IntVar = IntVar()        
