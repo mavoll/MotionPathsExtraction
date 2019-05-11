@@ -159,7 +159,8 @@ class App(object):
             else: 
                 self.start_bulk_video()
             
-    def start_video(self):
+    def start_video(self):        
+        
         if self.opencv_thread is None:            
             self.source_changed = False
             self.opencv_thread = Thread(target=self.run_opencv_thread)
@@ -302,11 +303,12 @@ class App(object):
             file_stream.stop()
             self.source_changed = False
             
-            if self.bulk_processing:                
-                self.input_source = self.glob.pop(0)
-                self.start_video()
-            
-            self.start_processing()
+            if self.bulk_processing:
+                if len(self.glob) > 0:
+                    self.input_source = self.glob.pop(0)
+                    self.start_processing()
+            else:            
+                self.start_processing()
 
     def initializeDetector(self):
                 
