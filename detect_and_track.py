@@ -61,7 +61,7 @@ class LoggingQueueHandler(logging.Handler):
 
 class App(object):
     
-    def __init__(self, bulk_processing=False, show_logging=True, gpu_id=None, instance_id=None, config_file=None, input_folder=None, file_types=None):
+    def __init__(self, bulk_processing=False, show_logging=True, gpu_id=None, instance_id=None, config_file=None, input_folder=None, file=None):
         
         self.root = Tk()
         self.bulk_processing = bulk_processing        
@@ -71,15 +71,13 @@ class App(object):
         self.input_source = None
         self.source_changed = False
         self.opencv_thread = None
-        self.input_folder = input_folder
-        self.file_types = file_types
         self.window = None
         self.tracker = None
         
         if self.bulk_processing:  
             
             workspace.GlobalInit(['caffe2', '--caffe2_log_level=0'])
-            self.glob = glob.glob(self.input_folder + '/**/*.' + self.file_types, recursive=True)
+            self.input_source = file
             self.load_config_file(config_file)            
             self.app_gpu = gpu_id
             self.app_save_det_result_path = input_folder
@@ -150,7 +148,7 @@ class App(object):
                 
         if len(self.glob) > 0:
             
-            self.input_source = self.glob.pop(0)
+            #self.input_source = self.glob.pop(0)
             
             file_name = os.path.splitext(self.input_source)[0] + "_tracks.csv"
             
@@ -303,12 +301,16 @@ class App(object):
             file_stream.stop()
             self.source_changed = False
             
-            if self.bulk_processing:
-                if len(self.glob) > 0:
-                    self.input_source = self.glob.pop(0)
-                    self.start_processing()
-            else:            
+#            if self.bulk_processing:
+#                if len(self.glob) > 0:
+#                    self.input_source = self.glob.pop(0)
+#                    self.start_processing()
+#            else:            
+#                self.start_processing()
+            
+            if not self.bulk_processing:
                 self.start_processing()
+            
 
     def initializeDetector(self):
                 

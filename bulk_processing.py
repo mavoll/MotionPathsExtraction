@@ -3,6 +3,7 @@ import sys
 import subprocess
 import multiprocessing
 import time
+import glob
 
 import detect_and_track
 
@@ -29,7 +30,7 @@ class BulkProcessor(object):
         if len(self.gpu_ids) != len(self.configs):
         	sys.exit('len(self.gpu_ids) != len(self.configs) != len(self.inputs) != len(self.outputs)')
         
-    def process(self, i, j, count):
+    def process(self, i, j, count, file):
         
         print("Starting process %d on GPU %d" % (j, int(self.gpu_ids[i][1]))) 
         
@@ -40,7 +41,7 @@ class BulkProcessor(object):
                                            j, 
                                            str(self.configs[i][1]), 
                                            str(self.inputs[count][1]), 
-                                           str(self.file_types[i][1]))
+                                           str(file))
             process.start_bulk()
             print("Process on GPU %d stopped" % int(self.gpu_ids[i][1]))
         
@@ -57,17 +58,36 @@ if __name__ == '__main__':
     except RuntimeError:
         pass
     
-    procs = []
-    bulk = BulkProcessor()           
+    
+    bulk = BulkProcessor()                    
            
+    proc_dict = {}
     count = 0
     for i in range(len(bulk.gpu_ids)):  
-        for j in range(int(bulk.num_instances[i][1])):
-            p = multiprocessing.Process(target=bulk.process, args=(i, j, count))
-            procs.append(p)
-            p.start()
-            count += 1
-            time.sleep(20)
+        for j in range(int(bulk.num_instances[i][1])):            
             
-    for proc in procs:
-        proc.join()
+            glob = glob.glob(bulk.inputs[count][1] + '/**/*.' + bulk.file_types[i][1], recursive=True)            
+            procs = []
+            for t in range(0, len(glob)):
+                p = multiprocessing.Process(target=bulk.process, args=(i, j, count, glob.pop(0)))
+                procs.append(p)
+            proc_dict[str(i) + str(j)] = procs
+            
+            count += 1
+                
+    while len(proc_dict.keys) > 0:
+        procs = []
+        for i in range(len(bulk.gpu_ids)):  
+            for j in range(int(bulk.num_instances[i][1])):
+                            
+                if len(proc_dict[str(i) + str(j)]) == 0:
+                    proc_dict.pop(str(i) + str(j))
+                    continue
+                
+                proc = proc_dict[str(i) + str(j)].pop(0)          
+                procs.append(proc)
+                proc.start()
+                time.sleep(20)
+                
+        for proc in procs:
+            proc.join()
