@@ -87,14 +87,12 @@ if __name__ == '__main__':
                 proc = proc_dict[str(i) + str(j)].pop(0)
                 proc_arr.append((i, j, proc))
                 proc.start()
-                time.sleep(20)
-            else:
-                proc_dict.pop(str(i) + str(j))                
+                time.sleep(20)            
     
     while len(proc_arr) > 0:        
         for index, (i, j, proc) in enumerate(proc_arr):            
             if not proc.is_alive():
-                if len(proc_dict[str(i) + str(j)]) > 0:
+                if str(i) + str(j) in proc_dict and len(proc_dict[str(i) + str(j)]) > 0:
                     proc = proc_dict[str(i) + str(j)].pop(0)
                     del proc_arr[index]                    
                     time.sleep(20)
@@ -144,6 +142,8 @@ if __name__ == '__main__':
 #        
 #        for proc in proc_arr:
 #            proc.join()
+#        
+#        time.sleep(20)
 #        
 #        
 #        if len(proc_dict) == 0:
