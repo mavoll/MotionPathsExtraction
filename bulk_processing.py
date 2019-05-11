@@ -63,31 +63,31 @@ if __name__ == '__main__':
            
     proc_dict = {}
     count = 0
-    for i in range(len(bulk.gpu_ids)):  
-        for j in range(int(bulk.num_instances[i][1])):            
-            
-            glob_list = glob.glob(bulk.inputs[count][1] + '/**/*.' + bulk.file_types[i][1], recursive=True)            
-            procs = []
-            for t in range(0, len(glob_list)):
-                p = multiprocessing.Process(target=bulk.process, args=(i, j, count, glob_list.pop(0)))
-                procs.append(p)
-            proc_dict[str(i) + str(j)] = procs
-            
-            count += 1
-                
-    while len(proc_dict) > 0:
-        procs = []
+    while True:
+        procs_tmp = []
         for i in range(len(bulk.gpu_ids)):  
-            for j in range(int(bulk.num_instances[i][1])):
+            for j in range(int(bulk.num_instances[i][1])):            
+                
+                if str(i) + str(j) not in proc_dict:
+                    glob_list = glob.glob(bulk.inputs[count][1] + '/**/*.' + bulk.file_types[i][1], recursive=True)            
+                    procs = []
+                    for t in range(0, len(glob_list)):
+                        p = multiprocessing.Process(target=bulk.process, args=(i, j, count, glob_list.pop(0)))
+                        procs.append(p)
+                    proc_dict[str(i) + str(j)] = procs
+                
+                    count += 1
+                    
+                if len(proc_dict[str(i) + str(j)]) > 0:
+                    proc = proc_dict[str(i) + str(j)].pop(0)          
+                    procs_tmp.append(proc)
+                    proc.start()
+                    time.sleep(20)
+                else:
+                    proc_dict.pop(str(i) + str(j))                
                             
-                if len(proc_dict[str(i) + str(j)]) == 0:
-                    proc_dict.pop(str(i) + str(j))
-                    continue
-                
-                proc = proc_dict[str(i) + str(j)].pop(0)          
-                procs.append(proc)
-                proc.start()
-                time.sleep(20)
-                
-        for proc in procs:
+        for proc in procs_tmp:
             proc.join()
+        
+        if len(proc_dict) == 0:
+            break

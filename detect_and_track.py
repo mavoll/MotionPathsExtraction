@@ -150,8 +150,6 @@ class App(object):
             
         if os.path.isfile(file_name) is not True:
             self.start_video()
-        else: 
-            self.start_bulk_video()
             
     def start_video(self):        
         
