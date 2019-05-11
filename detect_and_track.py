@@ -77,6 +77,7 @@ class App(object):
         if self.bulk_processing:  
             
             workspace.GlobalInit(['caffe2', '--caffe2_log_level=0'])
+            self.thread_running = True
             self.input_source = file
             self.load_config_file(config_file)            
             self.app_gpu = gpu_id
