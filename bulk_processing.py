@@ -75,7 +75,7 @@ if __name__ == '__main__':
             
             count += 1
                 
-    while len(proc_dict.keys) > 0:
+    while len(proc_dict) > 0:
         procs = []
         for i in range(len(bulk.gpu_ids)):  
             for j in range(int(bulk.num_instances[i][1])):
