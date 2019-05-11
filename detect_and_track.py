@@ -135,22 +135,13 @@ class App(object):
         if filename:
             self.input_source = filename
             self.source_changed = True
-            self.start_video()
-       
-    def check_opencv_thread_running(self):
-        if self.opencv_thread is not None and self.opencv_thread.isAlive():            
-            return True
-        else:
-            return False
-            
-        self.main.after(1000, self.check_opencv_thread_running)
+            self.start_video()  
     
     def start_bulk(self):
            
         self.start_video()
-        
-        if self.check_opencv_thread_running() is True:
-            self.root.mainloop()
+        while self.thread_running is True:
+            self.root.mainloop()        
         
     def start_video(self):        
         
@@ -295,6 +286,7 @@ class App(object):
                 
             file_stream.stop()
             self.source_changed = False
+            self.thread_running = False
             
 #            if self.bulk_processing:
 #                if len(self.glob) > 0:
