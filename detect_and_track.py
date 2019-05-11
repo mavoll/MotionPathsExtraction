@@ -146,16 +146,12 @@ class App(object):
         
     def start_bulk_video(self):
                 
-        if len(self.glob) > 0:
+        file_name = os.path.splitext(self.input_source)[0] + "_tracks.csv"
             
-            #self.input_source = self.glob.pop(0)
-            
-            file_name = os.path.splitext(self.input_source)[0] + "_tracks.csv"
-            
-            if os.path.isfile(file_name) is not True:
-                self.start_video()
-            else: 
-                self.start_bulk_video()
+        if os.path.isfile(file_name) is not True:
+            self.start_video()
+        else: 
+            self.start_bulk_video()
             
     def start_video(self):        
         
