@@ -64,7 +64,9 @@ if __name__ == '__main__':
     proc_dict = {}
     count = 0
     while True:
-        procs_tmp = []
+        
+        proc_arr = []
+        
         for i in range(len(bulk.gpu_ids)):  
             for j in range(int(bulk.num_instances[i][1])):            
                 
@@ -79,15 +81,16 @@ if __name__ == '__main__':
                     count += 1
                     
                 if len(proc_dict[str(i) + str(j)]) > 0:
-                    proc = proc_dict[str(i) + str(j)].pop(0)          
-                    procs_tmp.append(proc)
+                    proc = proc_dict[str(i) + str(j)].pop(0)
+                    proc_arr.append(proc)
                     proc.start()
                     time.sleep(20)
                 else:
                     proc_dict.pop(str(i) + str(j))                
-                            
-        for proc in procs_tmp:
+        
+        for proc in proc_arr:
             proc.join()
+        
         
         if len(proc_dict) == 0:
             break
