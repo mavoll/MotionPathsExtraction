@@ -65,7 +65,6 @@ if __name__ == '__main__':
     count = 0
            
     proc_arr = []
-    events = []
     
     for i in range(len(bulk.gpu_ids)):  
         for j in range(int(bulk.num_instances[i][1])):            
@@ -100,6 +99,7 @@ if __name__ == '__main__':
                     del proc_arr[index]                    
                     time.sleep(20)
                     proc.start()
+        time.sleep(1)
                 
                     
         
