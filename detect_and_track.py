@@ -9,7 +9,6 @@ import os
 import queue
 from threading import Thread
 import time
-import glob
 
 from tkinter import Toplevel
 from tkinter.filedialog import askopenfilename
@@ -77,14 +76,14 @@ class App(object):
         if self.bulk_processing:  
             
             workspace.GlobalInit(['caffe2', '--caffe2_log_level=0'])
-            self.thread_running = True
             self.input_source = file
             self.load_config_file(config_file)            
             self.app_gpu = gpu_id
             self.app_save_det_result_path = input_folder
             self.app_save_tracking_result_path = input_folder
             self.setup_logging(__name__)                       
-            self.logger = logging.getLogger(__name__)      
+            self.logger = logging.getLogger(__name__)   
+            print('XXXXXXX' + file)
         
         else:   
             self.v_1: IntVar = IntVar()        
@@ -141,8 +140,7 @@ class App(object):
     def start_bulk(self):
            
         self.start_video()
-        while self.thread_running is True:
-            self.root.mainloop()        
+        self.root.mainloop()        
         
     def start_video(self):        
         
@@ -287,17 +285,11 @@ class App(object):
                 
             file_stream.stop()
             self.source_changed = False
-            self.thread_running = False
-            
-#            if self.bulk_processing:
-#                if len(self.glob) > 0:
-#                    self.input_source = self.glob.pop(0)
-#                    self.start_processing()
-#            else:            
-#                self.start_processing()
             
             if not self.bulk_processing:
                 self.start_processing()
+            else:
+                self.root.quit()
             
 
     def initializeDetector(self):
