@@ -66,10 +66,10 @@ if __name__ == '__main__':
     for i in range(len(bulk.gpu_ids)):  
         for j in range(int(bulk.num_instances[i][1])):            
             
-            glob = glob.glob(bulk.inputs[count][1] + '/**/*.' + bulk.file_types[i][1], recursive=True)            
+            glob_list = glob.glob(bulk.inputs[count][1] + '/**/*.' + bulk.file_types[i][1], recursive=True)            
             procs = []
-            for t in range(0, len(glob)):
-                p = multiprocessing.Process(target=bulk.process, args=(i, j, count, glob.pop(0)))
+            for t in range(0, len(glob_list)):
+                p = multiprocessing.Process(target=bulk.process, args=(i, j, count, glob_list.pop(0)))
                 procs.append(p)
             proc_dict[str(i) + str(j)] = procs
             
