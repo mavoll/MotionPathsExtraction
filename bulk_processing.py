@@ -85,7 +85,7 @@ if __name__ == '__main__':
             count += 1
     
     while len(proc_dict) > 0:        
-        for index, (key, procs) in enumerate(proc_dict):
+        for key, procs in proc_dict.items():
             proc = procs[0]
             if not proc.is_alive():
                 procs.remove(0)
@@ -94,7 +94,7 @@ if __name__ == '__main__':
                     proc_dict[key] = procs      
                     next_proc = procs[0]                                
                     time.sleep(30) 
-                    proc.start()                                   
+                    next_proc.start()                                   
                     time.sleep(30)
                 else:
                     del proc_dict[key]
