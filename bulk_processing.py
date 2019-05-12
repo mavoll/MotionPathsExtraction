@@ -67,21 +67,20 @@ if __name__ == '__main__':
     for i in range(len(bulk.gpu_ids)):  
         for j in range(int(bulk.num_instances[i][1])):            
             
-            if str(i) + str(j) not in proc_dict:
-                glob_list = glob.glob(bulk.inputs[count][1] + '/**/*.' + bulk.file_types[i][1], recursive=True)            
-                procs = []
-                
-                for index, vid_file_name in enumerate(glob_list):
-                    file_name = os.path.splitext(vid_file_name)[0] + "_tracks.csv"            
-                    if os.path.isfile(file_name) is not True:
-                        p = multiprocessing.Process(target=bulk.process, args=(i, j, count, vid_file_name))
-                        procs.append(p)
-                
-                if len(procs) > 0:
-                    proc_dict[str(i) + str(j)] = procs
-                    proc = procs[0]
-                    proc.start()
-                    time.sleep(30) 
+            glob_list = glob.glob(bulk.inputs[count][1] + '/**/*.' + bulk.file_types[i][1], recursive=True)            
+            procs = []
+            
+            for index, vid_file_name in enumerate(glob_list):
+                file_name = os.path.splitext(vid_file_name)[0] + "_tracks.csv"            
+                if os.path.isfile(file_name) is not True:
+                    p = multiprocessing.Process(target=bulk.process, args=(i, j, count, vid_file_name))
+                    procs.append(p)
+            
+            if len(procs) > 0:
+                proc_dict[str(i) + str(j)] = procs
+                proc = procs[0]
+                proc.start()
+                time.sleep(30) 
             
             count += 1
     
@@ -93,10 +92,11 @@ if __name__ == '__main__':
                 
                 if len(procs) > 0:
                     proc_dict[key] = procs      
-                    next_proc = procs[0]                
+                    next_proc = procs[0]                                
+                    time.sleep(30) 
+                    proc.start()                                   
                     time.sleep(30)
-                    proc.start()
                 else:
                     del proc_dict[key]
                     
-        time.sleep(1)
+        time.sleep(30)
