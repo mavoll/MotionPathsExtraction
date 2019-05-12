@@ -63,9 +63,7 @@ if __name__ == '__main__':
            
     proc_dict = {}
     count = 0
-           
-    proc_arr = []
-    
+               
     for i in range(len(bulk.gpu_ids)):  
         for j in range(int(bulk.num_instances[i][1])):            
             
@@ -78,22 +76,27 @@ if __name__ == '__main__':
                     if os.path.isfile(file_name) is not True:
                         p = multiprocessing.Process(target=bulk.process, args=(i, j, count, vid_file_name))
                         procs.append(p)
-                        proc_arr.append((i, j, p))
-                proc_dict[str(i) + str(j)] = procs            
                 
-            if len(proc_dict[str(i) + str(j)]) > 0:
-                proc = proc_dict[str(i) + str(j)].pop(0)                
-                proc.start()
-                time.sleep(30)
+                if len(procs) > 0:
+                    proc_dict[str(i) + str(j)] = procs
+                    proc = procs.get(0)
+                    proc.start()
+                    time.sleep(30) 
             
             count += 1
     
-    while len(proc_arr) > 0:        
-        for index, (i, j, proc) in enumerate(proc_arr):            
+    while len(proc_dict) > 0:        
+        for key, procs in enumerate(proc_dict):
+            proc = procs.get(0)
             if not proc.is_alive():
-                if len(proc_dict[str(i) + str(j)]) > 0:
-                    proc = proc_dict[str(i) + str(j)].pop(0)
-                    del proc_arr[index]                    
+                procs.remove(0)
+                
+                if len(procs) > 0:
+                    proc_dict[key] = procs      
+                    next_proc = procs.get(0)                 
                     time.sleep(30)
                     proc.start()
+                else:
+                    del proc_dict[key]
+                    
         time.sleep(1)
