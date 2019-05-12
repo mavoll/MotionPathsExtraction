@@ -79,7 +79,7 @@ if __name__ == '__main__':
                 
                 if len(procs) > 0:
                     proc_dict[str(i) + str(j)] = procs
-                    proc = procs.get(0)
+                    proc = procs[0]
                     proc.start()
                     time.sleep(30) 
             
@@ -87,13 +87,13 @@ if __name__ == '__main__':
     
     while len(proc_dict) > 0:        
         for key, procs in enumerate(proc_dict):
-            proc = procs.get(0)
+            proc = procs[0]
             if not proc.is_alive():
                 procs.remove(0)
                 
                 if len(procs) > 0:
                     proc_dict[key] = procs      
-                    next_proc = procs.get(0)                 
+                    next_proc = procs[0]                
                     time.sleep(30)
                     proc.start()
                 else:
