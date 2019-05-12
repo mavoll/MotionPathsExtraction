@@ -78,11 +78,11 @@ if __name__ == '__main__':
                     if os.path.isfile(file_name) is not True:
                         p = multiprocessing.Process(target=bulk.process, args=(i, j, count, vid_file_name))
                         procs.append(p)
+                        proc_arr.append((i, j, p))
                 proc_dict[str(i) + str(j)] = procs            
                 
             if len(proc_dict[str(i) + str(j)]) > 0:
-                proc = proc_dict[str(i) + str(j)].pop(0)
-                proc_arr.append((i, j, proc))
+                proc = proc_dict[str(i) + str(j)].pop(0)                
                 proc.start()
                 time.sleep(30)
             
