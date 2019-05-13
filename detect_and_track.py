@@ -139,7 +139,8 @@ class App(object):
     def start_bulk(self):
            
         self.start_video()
-        self.root.mainloop()        
+        self.root.mainloop()
+        sys.exit()
         
     def start_video(self):        
         

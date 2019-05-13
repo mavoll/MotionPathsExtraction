@@ -74,6 +74,7 @@ if __name__ == '__main__':
                 file_name = os.path.splitext(vid_file_name)[0] + "_tracks.csv"            
                 if os.path.isfile(file_name) is not True:
                     p = multiprocessing.Process(target=bulk.process, args=(i, j, count, vid_file_name))
+                    p.daemon = True
                     procs.append(p)
             
             if len(procs) > 0:
