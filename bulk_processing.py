@@ -77,7 +77,7 @@ if __name__ == '__main__':
                     procs.append(p)
             
             if len(procs) > 0:
-                proc_dict[str(i) + str(j)] = procs
+                proc_dict[str(i) + str(j)] = procs.copy()
                 proc = procs[0]
                 proc.start()
                 time.sleep(30) 
@@ -91,7 +91,7 @@ if __name__ == '__main__':
                 procs.remove(0)
                 
                 if len(procs) > 0:
-                    proc_dict[key] = procs      
+                    proc_dict[key] = procs.copy()     
                     next_proc = procs[0]                                
                     time.sleep(30) 
                     next_proc.start()                                   
