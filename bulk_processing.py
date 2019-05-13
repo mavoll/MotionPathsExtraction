@@ -88,6 +88,7 @@ if __name__ == '__main__':
         for key, procs in proc_dict.items():
             proc = procs[0]
             if not proc.is_alive():
+                print("SSSS")
                 procs.remove(0)
                 
                 if len(procs) > 0:
