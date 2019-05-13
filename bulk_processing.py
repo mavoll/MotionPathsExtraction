@@ -89,8 +89,7 @@ if __name__ == '__main__':
         for key, procs in proc_dict.items():
             proc = procs[0]
             if not proc.is_alive():
-                print("SSSS")
-                procs.remove(0)
+                del procs[0]
                 
                 if len(procs) > 0:
                     proc_dict[key] = procs.copy()     
@@ -100,7 +99,5 @@ if __name__ == '__main__':
                     time.sleep(30)
                 else:
                     del proc_dict[key]
-            else:
-                print("TTTTT")
                     
         time.sleep(1)
