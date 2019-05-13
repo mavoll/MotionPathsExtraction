@@ -99,5 +99,7 @@ if __name__ == '__main__':
                     time.sleep(30)
                 else:
                     del proc_dict[key]
+            else:
+                print("TTTTT")
                     
         time.sleep(1)
