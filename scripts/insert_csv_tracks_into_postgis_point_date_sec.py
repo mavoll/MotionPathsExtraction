@@ -11,7 +11,6 @@ def insert_track(self, track):
           
     try:
         self._cur.execute(sql,track)
-        self._conn.commit()
            
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)    

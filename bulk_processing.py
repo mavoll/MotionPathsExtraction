@@ -86,7 +86,8 @@ if __name__ == '__main__':
             count += 1
     
     while len(proc_dict) > 0:        
-        for key, procs in proc_dict.items():
+        for key in proc_dict.keys():
+            procs = proc_dict[key]
             proc = procs[0]
             if not proc.is_alive():
                 del procs[0]
