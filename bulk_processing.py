@@ -85,20 +85,23 @@ if __name__ == '__main__':
             
             count += 1
     
-    while len(proc_dict) > 0:        
-        for key in proc_dict.keys():
-            procs = proc_dict[key]
+    while len(proc_dict) > 0:  
+        tmp_dict = proc_dict.copy()
+        for key in tmp_dict.keys():
+            procs = tmp_dict[key]
             proc = procs[0]
             if not proc.is_alive():
                 del procs[0]
                 
                 if len(procs) > 0:
-                    proc_dict[key] = procs.copy()     
+                    tmp_dict[key] = procs.copy()     
                     next_proc = procs[0]                                
                     time.sleep(30) 
                     next_proc.start()                                   
                     time.sleep(30)
                 else:
-                    del proc_dict[key]
+                    del tmp_dict[key]
+                    
+        proc_dict = tmp_dict.copy()
                     
         time.sleep(1)
