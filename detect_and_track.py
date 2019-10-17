@@ -412,8 +412,14 @@ class App(object):
                                 
             target_lines.sort(key=lambda x: x[0])
             
-            head, tail = os.path.split(self.input_source)   
-            filename = os.path.splitext(tail)[0]                  
+            if isinstance(self.input_source, str):
+                head, tail = os.path.split(self.input_source)   
+                filename = os.path.splitext(tail)[0]    
+                        
+            elif isinstance(self.input_source, int):                   
+                head = self.app_save_det_result_path 
+                filename = 'cam'                 
+                   
             
             with open(head + '/' + filename + '_detections.csv', 'w+') as txtfile:
                 wr = csv.writer(txtfile, lineterminator='\n')
@@ -511,8 +517,14 @@ class App(object):
         try:
             tracking_boxes.sort(key = lambda x: (x[0], x[1]))
             
-            head, tail = os.path.split(self.input_source)   
-            filename = os.path.splitext(tail)[0]                  
+            if isinstance(self.input_source, str):
+                head, tail = os.path.split(self.input_source)   
+                filename = os.path.splitext(tail)[0]    
+                        
+            elif isinstance(self.input_source, int):                   
+                head = self.app_save_tracking_result_path
+                filename = 'cam'                
+                     
             
             with open(head + '/' + filename + '_tracks.csv', 'w+') as txtfile:
                 

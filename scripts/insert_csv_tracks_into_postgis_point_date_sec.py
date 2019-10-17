@@ -78,41 +78,43 @@ class App(object):
 
     def run(self):
         
-        with open(self.args['track_file_path'], 'r') as csv_file:
-
-                csv_reader = csv.reader(csv_file, delimiter=',')
-                next(csv_reader, None)
-                line_count = 0
-                
-                slicee = self.args['slice']
-                day = self.args['day']
-                part = self.args['part']
-                subpart = self.args['subpart']
-                subpartstarttime = int(self.args['subpartstarttime'])
-                framerate = int(self.args['framerate'])
-
-                for row in csv_reader:
-                
-                    cam = row[11]
-                    image_id = float(row[0])
-                    track_id = float(row[1])
-                    track_class = int(float(row[7]))   
-                                        
-                    x_utm = row[13]                    
-                    y_utm = row[14]
-                    
-                    timestamp = datetime.datetime.fromtimestamp(subpartstarttime) + datetime.timedelta(milliseconds = (image_id / framerate) * 1000)
-                                
-                    point = 'SRID=5555;POINT({0} {1})'.format(str(x_utm), str(y_utm))
-                    
-                    insert_track(self, (slicee, cam, day, part, subpart, track_id, timestamp.strftime('%Y-%m-%d %H:%M:%S'), track_class, point))
-                                                
-                    line_count += 1
-       
-    def __del__(self):
+        try:
         
-        if self._cur is not None: self._cur.close()
-        if self._cur is not None: self._conn.close()
+            with open(self.args['track_file_path'], 'r') as csv_file:
+    
+                    csv_reader = csv.reader(csv_file, delimiter=',')
+                    next(csv_reader, None)
+                    line_count = 0
+                    
+                    slicee = self.args['slice']
+                    day = self.args['day']
+                    part = self.args['part']
+                    subpart = self.args['subpart']
+                    subpartstarttime = int(self.args['subpartstarttime'])
+                    framerate = int(self.args['framerate'])
+    
+                    for row in csv_reader:
+                    
+                        cam = row[11]
+                        image_id = float(row[0])
+                        track_id = float(row[1])
+                        track_class = int(float(row[7]))   
+                                            
+                        x_utm = row[13]                    
+                        y_utm = row[14]
+                        
+                        timestamp = datetime.datetime.fromtimestamp(subpartstarttime) + datetime.timedelta(milliseconds = (image_id / framerate) * 1000)
+                                    
+                        point = 'SRID=5555;POINT({0} {1})'.format(str(x_utm), str(y_utm))
+                        
+                        insert_track(self, (slicee, cam, day, part, subpart, track_id, timestamp.strftime('%Y-%m-%d %H:%M:%S'), track_class, point))
+                                                    
+                        line_count += 1
+                        
+        finally:
+            
+            if self._cur is not None: self._cur.close()
+            if self._cur is not None: self._conn.close()
 
 if __name__ == '__main__':
     #    import sys
